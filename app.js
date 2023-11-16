@@ -40,13 +40,13 @@ const LocalStrategy = require("passport-local");
 /* mongoSanitize*/
 const mongoSanitize = require("express-mongo-sanitize");
 
-const dbUrl = "mongodb://127.0.0.1:27017/ivdVisualization";
+/* const dbUrl = "mongodb://127.0.0.1:27017/ivdVisualization";
 
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
   console.log("Database Connected");
-}
+} */
 
 /* View Engine */
 app.engine("ejs", ejsMate);
@@ -60,7 +60,7 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(mongoSanitize());
 
-const secret = "IVD Visualization";
+/* const secret = "IVD Visualization";
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   touchAfter: 24 * 60 * 60,
@@ -86,7 +86,7 @@ app.use(
   })
 );
 
-app.use(flash());
+app.use(flash()); */
 
 /* app.use(helmet());
 const scriptSrcUrls = ["https://cdn.tailwindcss.com", "https://unpkg.com/"];
@@ -129,6 +129,10 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
   res.render("ivd/index");
+});
+
+app.get("/login", (req, res) => {
+  res.render("users/login");
 });
 
 app.listen(port, () => {
