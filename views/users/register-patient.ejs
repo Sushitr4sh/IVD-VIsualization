@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/output.css" />
+  </head>
+  <body>
+    <nav
+      class="bg-[#749bc2] w-full px-8 py-2 text-white flex justify-between items-center fixed"
+    >
+      <h1 class="text-2xl font-bold">IVD Visualization</h1>
+      <img src="images/setting.png" class="w-6" />
+    </nav>
+    <main
+      class="h-[100vh] flex items-center justify-between gap-x-8 px-32 text-xl"
+    >
+      <form action="/register-patient" method="POST" class="w-full">
+        <div class="w-full flex gap-x-8">
+          <div class="w-full">
+            <label for="patientId" class="font-bold block">Patient ID</label>
+            <input
+              type="text"
+              class="px-3 py-2 bg-[#91c8e4] w-full mt-2"
+              placeholder="Patient ID"
+              name="password"
+              id="password"
+              required
+            />
+          </div>
+          <div class="w-full">
+            <label for="username" class="font-bold block">Name</label>
+            <input
+              type="text"
+              class="px-3 py-2 bg-[#91c8e4] w-full mt-2"
+              placeholder="Name"
+              name="username"
+              id="username"
+              required
+            />
+          </div>
+          <div class="w-full">
+            <label for="dateOfBirth" class="font-bold block"
+              >Date of Birth</label
+            >
+            <input
+              type="date"
+              class="px-3 py-2 bg-[#91c8e4] w-full mt-2"
+              placeholder="Date of Birth"
+              name="dateOfBirth"
+              id="dateOfBirth"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex w-full justify-end mt-4">
+          <button class="bg-[#91c8e4] px-2 py-2 text-center">Register</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

@@ -6,10 +6,10 @@
       <p class="font-bold">Full Name</p>
       <div class="font-thin">
         <div class="flex items-center gap-x-2">
-          <p>Vanessa Evlin</p>
+          <p><%= patient.username %></p>
           <img src="images/edit-name.png" class="w-6" />
         </div>
-        <p>ID: P00001</p>
+        <p>ID: <%= patient.patientId %></p>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
   </div>
   <div class="w-[20%] rounded-xl bg-[#91c8e4] flex flex-col items-center p-4">
     <p class="font-bold">Date of Birth</p>
-    <p class="text-center font-thin">19<br />Oktober<br />2001</p>
+    <p class="text-center font-thin"><%= patient.dateOfBirth %></p>
   </div>
   <div class="w-[40%] rounded-xl bg-[#91c8e4] flex justify-between gap-x-4 p-4">
     <div class="flex flex-col justify-between">
@@ -101,7 +101,10 @@
             <div class="flex justify-between items-center mt-2">
               <img src="images/blood-pressure.png" alt="" srcset="" />
               <p class="font-bold text-[#6472f8] text-5xl">
-                120/80<span class="text-black font-thin text-base">mmHg</span>
+                <%= patient.bloodPressure %><span
+                  class="text-black font-thin text-base"
+                  >mmHg</span
+                >
               </p>
             </div>
           </div>

@@ -40,13 +40,14 @@ const LocalStrategy = require("passport-local");
 /* mongoSanitize*/
 const mongoSanitize = require("express-mongo-sanitize");
 
-/* const dbUrl = "mongodb://127.0.0.1:27017/ivdVisualization";
+const dbUrl =
+  process.env.DB_URL || "mongodb://127.0.0.1:27017/ivdVisualization";
 
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
   console.log("Database Connected");
-} */
+}
 
 /* View Engine */
 app.engine("ejs", ejsMate);
@@ -60,7 +61,7 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(mongoSanitize());
 
-/* const secret = "IVD Visualization";
+const secret = "IVD Visualization";
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   touchAfter: 24 * 60 * 60,
@@ -86,35 +87,9 @@ app.use(
   })
 );
 
-app.use(flash()); */
+app.use(flash());
 
-/* app.use(helmet());
-const scriptSrcUrls = ["https://cdn.tailwindcss.com", "https://unpkg.com/"];
-const styleSrcUrls = [
-  "https://fonts.googleapis.com/",
-  "https://cdnjs.cloudflare.com/",
-];
-
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: [],
-      connectSrc: ["'self'"],
-      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-      workerSrc: ["'self'", "blob:"],
-      objectSrc: [],
-      imgSrc: [
-        "'self'",
-        "blob:",
-        "data:",
-        "https://s3.amazonaws.com/stabled.response/",
-      ],
-    },
-  }),
-); */
-
-/* app.use(passport.initialize());
+app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -125,14 +100,65 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.idError = req.flash("idError");
   next();
-}); */
-
-app.get("/", (req, res) => {
-  res.render("ivd/index");
 });
 
-app.get("/login", (req, res) => {
-  res.render("users/login");
+app.get("/register-patient", (req, res) => {
+  res.render("users/register-patient");
+});
+
+app.post("/register-patient", async (req, res) => {
+  try {
+    const { password, username, dateOfBirth } = req.body;
+    const user = new User({ username, dateOfBirth, patientId: password });
+    const registeredUser = await User.register(user, password);
+    req.login(registeredUser, (err) => {
+      if (err) res.send(err);
+      else {
+        res.redirect(`/${password}`);
+      }
+    });
+  } catch (e) {
+    req.flash("error", e.message);
+    res.redirect("/register-patient");
+  }
+});
+
+app.get("/search-patient", (req, res) => {
+  res.render("users/search-patient");
+});
+
+app.post(
+  "/search-patient",
+  passport.authenticate("local", {
+    failureFlash: true,
+    failureRedirect: "/login",
+  }),
+  (req, res) => {
+    res.redirect("/chats");
+  }
+);
+
+app.get("/:patientId", async (req, res) => {
+  const { patientId } = req.params;
+  const patient = await User.findOne({ patientId: patientId });
+  console.log(patient);
+  res.render("ivd/index", { patient });
+});
+
+app.get("/:patientId/add-data", (req, res) => {
+  const { patientId } = req.params;
+  res.render("users/add-data", { patientId });
+});
+
+app.post("/:patientId/add-data", async (req, res) => {
+  const { patientId } = req.params;
+  await User.findOneAndUpdate(
+    { patientId: patientId },
+    {
+      bloodPressure: req.body.bloodPressure,
+    }
+  );
+  res.redirect(`/${patientId}`);
 });
 
 app.listen(port, () => {
