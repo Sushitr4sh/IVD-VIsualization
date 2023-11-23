@@ -1,16 +1,20 @@
-const { required } = require("joi");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const passportLocalMongoose = require("passport-local-mongoose");
-
-const userSchema = new Schema({
-  dateOfBirth: {
-    type: Date,
-    required: true,
+const patientSchema = new Schema({
+  fullName: {
+    type: String,
   },
   patientId: {
     type: String,
+  },
+  gender: {
+    type: String,
+    enum: ["Male", "Female"],
+  },
+  dateOfBirth: {
+    type: Date,
+    required: true,
   },
   bloodPressure: {
     type: String,
@@ -50,6 +54,4 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.plugin(passportLocalMongoose);
-
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Patient", patientSchema);

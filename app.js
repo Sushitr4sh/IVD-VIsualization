@@ -19,26 +19,15 @@ const path = require("path");
 const moment = require("moment");
 
 /* Mongoose Models */
-const User = require("./models/user");
+const Patient = require("./models/patient");
 
 /* EJS */
 const ejsMate = require("ejs-mate");
 
 /* Error Handlling */
 
-/* Cookies, Session, and Flash */
-const session = require("express-session");
-const flash = require("connect-flash");
-
 /* Connect Mongo */
 const MongoStore = require("connect-mongo");
-
-/* Passport */
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-
-/* mongoSanitize*/
-const mongoSanitize = require("express-mongo-sanitize");
 
 const dbUrl =
   process.env.DB_URL || "mongodb://127.0.0.1:27017/ivdVisualization";
@@ -59,106 +48,48 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
-app.use(mongoSanitize());
-
-const secret = "IVD Visualization";
-const store = MongoStore.create({
-  mongoUrl: dbUrl,
-  touchAfter: 24 * 60 * 60,
-  crypto: {
-    secret,
-  },
-});
-store.on("error", function (e) {
-  console.log(e);
-});
-
-app.use(
-  session({
-    store,
-    name: "session",
-    secret,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-      httpOnly: true,
-    },
-  })
-);
-
-app.use(flash());
-
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.idError = req.flash("idError");
-  next();
-});
 
 app.get("/register-patient", (req, res) => {
   res.render("users/register-patient");
 });
 
 app.post("/register-patient", async (req, res) => {
-  try {
-    const { password, username, dateOfBirth } = req.body;
-    const user = new User({ username, dateOfBirth, patientId: password });
-    const registeredUser = await User.register(user, password);
-    req.login(registeredUser, (err) => {
-      if (err) res.send(err);
-      else {
-        res.redirect(`/${password}`);
-      }
-    });
-  } catch (e) {
-    req.flash("error", e.message);
-    res.redirect("/register-patient");
-  }
+  const patient = new Patient(req.body);
+  await patient.save();
+  res.redirect(`/${patient.patientId}`);
 });
 
 app.get("/search-patient", (req, res) => {
   res.render("users/search-patient");
 });
 
-app.post(
-  "/search-patient",
-  passport.authenticate("local", {
-    failureFlash: true,
-    failureRedirect: "/login",
-  }),
-  (req, res) => {
-    res.redirect("/chats");
-  }
-);
-
-app.get("/:patientId", async (req, res) => {
-  const { patientId } = req.params;
-  const patient = await User.findOne({ patientId: patientId });
-  console.log(patient);
-  res.render("ivd/index", { patient });
+app.post("/search-patient", (req, res) => {
+  res.redirect("/chats");
 });
 
-app.get("/:patientId/add-data", (req, res) => {
+app.get("/:patientId/add-data", async (req, res) => {
   const { patientId } = req.params;
-  res.render("users/add-data", { patientId });
+  const patient = await Patient.findOne({ patientId: patientId });
+  res.render("users/add-data", { patient });
 });
 
 app.post("/:patientId/add-data", async (req, res) => {
   const { patientId } = req.params;
-  await User.findOneAndUpdate(
+  await Patient.findOneAndUpdate(
     { patientId: patientId },
     {
       bloodPressure: req.body.bloodPressure,
+      meanPulse: req.body.meanPulse,
     }
   );
   res.redirect(`/${patientId}`);
+});
+
+app.get("/:patientId", async (req, res) => {
+  const { patientId } = req.params;
+  const patient = await Patient.findOne({ patientId: patientId });
+  console.log(`This is query:` + patient);
+  res.render("ivd/index", { patient });
 });
 
 app.listen(port, () => {
