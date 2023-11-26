@@ -49,47 +49,56 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-app.get("/register-patient", (req, res) => {
-  res.render("users/register-patient");
+app.get("/register", (req, res) => {
+  res.render("patients/register-patient");
 });
 
-app.post("/register-patient", async (req, res) => {
+app.post("/register", async (req, res) => {
   const patient = new Patient(req.body);
   await patient.save();
-  res.redirect(`/${patient.patientId}`);
+  res.redirect(`/patients/${patient.patientId}`);
 });
 
-app.get("/search-patient", (req, res) => {
-  res.render("users/search-patient");
+app.get("/patients/search", (req, res) => {
+  res.render("patients/search-patient");
 });
 
-app.post("/search-patient", (req, res) => {
+/* app.post("/patients/search/:id", (req, res) => {
   res.redirect("/chats");
+}); */
+
+app.get("/patients/:id", async (req, res) => {
+  const { id } = req.params;
+  const patient = await Patient.findOne({ patientId: id });
+  console.log(`This is query:` + patient);
+  res.render("patients/index", { patient });
 });
 
-app.get("/:patientId/add-data", async (req, res) => {
-  const { patientId } = req.params;
-  const patient = await Patient.findOne({ patientId: patientId });
-  res.render("users/add-data", { patient });
+app.get("/patients/:id/add-data", async (req, res) => {
+  const { id } = req.params;
+  const patient = await Patient.findOne({ patientId: id });
+  res.render("patients/add-data", { patient });
 });
 
-app.post("/:patientId/add-data", async (req, res) => {
-  const { patientId } = req.params;
+app.post("/patients/:id/add-data", async (req, res) => {
+  const { id } = req.params;
   await Patient.findOneAndUpdate(
-    { patientId: patientId },
+    { patientId: id },
     {
-      bloodPressure: req.body.bloodPressure,
-      meanPulse: req.body.meanPulse,
+      systolic: req.body.systolic,
+      diastolic: req.body.diastolic,
+      bloodPressure: `${req.body.systolic}/${req.body.diastolic}`,
+      meanPulse: req.body.systolic - req.body.diastolic,
+      heartRate: req.body.heartRate,
+      spo2: req.body.spo2,
+      rr: req.body.rr,
+      bmi: req.body.bmi,
+      bodyTemperature: req.body.bodyTemperature,
+      bodyWeight: req.body.bodyWeight,
+      bodyHeight: req.body.bodyHeight,
     }
   );
-  res.redirect(`/${patientId}`);
-});
-
-app.get("/:patientId", async (req, res) => {
-  const { patientId } = req.params;
-  const patient = await Patient.findOne({ patientId: patientId });
-  console.log(`This is query:` + patient);
-  res.render("ivd/index", { patient });
+  res.redirect(`/patients/${id}`);
 });
 
 app.listen(port, () => {

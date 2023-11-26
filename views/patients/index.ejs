@@ -1,40 +1,53 @@
 <% layout('layouts/boilerplate') -%>
-<main class="px-32 flex gap-x-4 mt-8">
-  <div class="w-[40%] rounded-xl bg-[#91c8e4] flex gap-x-4 p-4">
-    <img src="images/empty-profile.png" class="w-24 h-24" />
+<main
+  class="lg:px-32 px-2 flex lg:gap-x-4 gap-x-2 lg:mt-8 mt-4 text-sm lg:text-base"
+>
+  <div
+    class="lg:w-[40%] w-[35%] rounded-xl bg-[#91c8e4] lg:flex gap-x-4 lg:px-4 lg:py-4 px-2 py-3"
+  >
+    <img
+      src="/images/empty-profile.png"
+      class="lg:w-24 lg:h-24 w-20 h-20 mx-auto lg:mx-0"
+    />
     <div class="flex flex-col justify-between">
-      <p class="font-bold">Full Name</p>
+      <p class="font-bold text-center lg:text-left mt-2 lg:mt-0">Full Name</p>
       <div class="font-thin">
-        <div class="flex items-center gap-x-2">
-          <p><%= patient.fullName %></p>
-          <img src="images/edit-name.png" class="w-6" />
+        <div class="lg:flex lg:items-center lg:gap-x-2">
+          <p class="text-center lg:text-left"><%= patient.fullName %></p>
+          <img src="/images/edit-name.png" class="w-6 hidden lg:inline-block" />
         </div>
-        <p>ID: <%= patient.patientId %></p>
+        <p class="text-center lg:text-left">ID: <%= patient.patientId %></p>
       </div>
     </div>
   </div>
-  <div class="w-[20%] rounded-xl bg-[#91c8e4] flex flex-col items-center p-4">
+  <div
+    class="w-[20%] hidden lg:flex rounded-xl bg-[#91c8e4] flex-col items-center justify-center"
+  >
     <p class="font-bold">Gender</p>
-    <img src="images/gender.png" class="w-16 h-16" />
+    <img src="/images/gender.png" class="w-16 h-16" />
   </div>
-  <div class="w-[20%] rounded-xl bg-[#91c8e4] flex flex-col items-center p-4">
+  <div
+    class="w-[20%] rounded-xl hidden lg:flex bg-[#91c8e4] flex-col items-center p-4"
+  >
     <p class="font-bold">Date of Birth</p>
     <p class="text-center font-thin"><%= patient.dateOfBirth %></p>
   </div>
-  <div class="w-[40%] rounded-xl bg-[#91c8e4] flex justify-between gap-x-4 p-4">
+  <div
+    class="lg:w-[40%] w-[65%] rounded-xl bg-[#91c8e4] flex justify-between gap-x-8 items-center lg:items-start lg:px-4 lg:py-4 px-4"
+  >
     <div class="flex flex-col justify-between">
       <div>
         <p class="font-bold">Room No.</p>
         <div class="flex gap-x-1 items-center">
           <p class="font-thin">ROOM00001</p>
-          <img src="images/edit-name.png" class="w-4" />
+          <img src="/images/edit-name.png" class="w-4" />
         </div>
       </div>
-      <div>
+      <div class="mt-2 lg:mt-0">
         <p class="font-bold">Bed No,</p>
         <div class="flex gap-x-1 items-center">
           <p class="font-thin">BED00001</p>
-          <img src="images/edit-name.png" class="w-4" />
+          <img src="/images/edit-name.png" class="w-4" />
         </div>
       </div>
     </div>
@@ -45,61 +58,63 @@
   </div>
 </main>
 
-<main class="mt-4 px-32 flex items-start">
-  <div class="flex flex-col gap-y-2 items-center">
+<main class="mt-4 lg:px-32 px-2 flex items-start">
+  <div class="flex flex-col gap-y-2 items-center w-[20%] lg:w-auto">
     <div
       class="py-4 px-6 hover:bg-[#91c8e4] transition duration-150 ease-in rounded-l-md shadow-xl w-full cursor-pointer"
       onclick="showPage('page1');"
-      onmouseover="changeImage('option1', 'images/checklist-white.png')"
-      onmouseout="changeImage('option1', 'images/checklist.png')"
+      onmouseover="changeImage('option1', '/images/checklist-white.png')"
+      onmouseout="changeImage('option1', '/images/checklist.png')"
       id="option1"
     >
-      <img src="images/checklist.png" id="option1Image" />
+      <img src="/images/checklist.png" id="option1Image" />
     </div>
     <div
       class="py-4 px-6 rounded-l-md shadow-xl cursor-pointer hover:bg-[#91c8e4] transition duration-150 ease-in"
       onclick="showPage('page2')"
-      onmouseover="changeImage('option2', 'images/sleep-white.png')"
-      onmouseout="changeImage('option2', 'images/sleep.png')"
+      onmouseover="changeImage('option2', '/images/sleep-white.png')"
+      onmouseout="changeImage('option2', '/images/sleep.png')"
       id="option2"
     >
-      <img src="images/sleep.png" id="option2Image" />
+      <img src="/images/sleep.png" id="option2Image" />
     </div>
     <div
       class="py-4 px-6 rounded-l-md shadow-xl cursor-pointer hover:bg-[#91c8e4] transition duration-150 ease-in"
       onclick="showPage('page3')"
-      onmouseover="changeImage('option3', 'images/heart-rate-white.png')"
-      onmouseout="changeImage('option3', 'images/heart-rate.png')"
+      onmouseover="changeImage('option3', '/images/heart-rate-white.png')"
+      onmouseout="changeImage('option3', '/images/heart-rate.png')"
       id="option3"
     >
-      <img src="images/heart-rate.png" id="option3Image" />
+      <img src="/images/heart-rate.png" id="option3Image" />
     </div>
     <div
       class="py-4 px-6 rounded-l-md shadow-xl cursor-pointer hover:bg-[#91c8e4] transition duration-150 ease-in"
       onclick="showPage('page4')"
-      onmouseover="changeImage('option4', 'images/person-white.png')"
-      onmouseout="changeImage('option4', 'images/person.png')"
+      onmouseover="changeImage('option4', '/images/person-white.png')"
+      onmouseout="changeImage('option4', '/images/person.png')"
       id="option4"
     >
-      <img src="images/person.png" id="option4Image" />
+      <img src="/images/person.png" id="option4Image" />
     </div>
   </div>
   <div
-    class="w-full bg-[#91c8e4] p-4 rounded-r-md rounded-bl-md gap-x-2 flex items-start main"
+    class="w-[80%] lg:w-full bg-[#91c8e4] lg:p-4 p-2 rounded-r-md rounded-bl-md gap-x-2 flex items-start main"
   >
     <div class="w-full hidden" id="page1">
-      <div class="flex gap-x-4 w-full">
-        <div class="rounded-xl bg-[#c8e4f1] w-[70%] h-96"></div>
-        <div class="rounded-xl bg-[#c8e4f1] w-[30%] h-96"></div>
-      </div>
-      <div class="flex gap-x-4 w-full mt-4">
+      <div class="flex-col lg:flex-row gap-x-4 w-full hidden lg:flex">
+        <div class="rounded-xl bg-[#c8e4f1] lg:w-[70%] lg:h-96 h-32"></div>
         <div
-          class="rounded-xl flex flex-col justify-between bg-[#c8e4f1] w-full p-4 h-64"
+          class="rounded-xl bg-[#c8e4f1] lg:w-[30%] lg:h-96 h-32 mt-2 lg:mt-0"
+        ></div>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-x-4 w-full lg:mt-4">
+        <div
+          class="rounded-xl flex flex-col justify-between bg-[#c8e4f1] w-full lg:p-4 p-2 h-64"
         >
           <div>
             <p class="font-bold text-xl">Blood Pressure</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/blood-pressure.png" alt="" srcset="" />
+              <img src="/images/blood-pressure.png" alt="" srcset="" />
               <p class="font-bold text-[#6472f8] text-5xl">
                 <%= patient.bloodPressure %><span
                   class="text-black font-thin text-base"
@@ -111,7 +126,7 @@
           <div>
             <p class="font-bold mt-2 text-xl">Mean Pulse</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/mean-pulse.png" alt="" srcset="" />
+              <img src="/images/mean-pulse.png" alt="" srcset="" />
               <p class="font-bold text-[#a472b8] text-5xl">
                 <%= patient.meanPulse %><span
                   class="text-black font-thin text-base"
@@ -122,12 +137,12 @@
           </div>
         </div>
         <div
-          class="rounded-xl bg-[#c8e4f1] w-full p-4 h-64 flex items-center justify-center"
+          class="rounded-xl bg-[#c8e4f1] w-full p-4 h-64 flex items-center justify-center mt-2 lg:mt-0"
         >
           <div class="w-full">
             <p class="font-bold text-xl">Heart Rate</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/heart-rate-2.png" alt="" srcset="" />
+              <img src="/images/heart-rate-2.png" alt="" srcset="" />
               <p class="font-bold text-[#e4c478] text-5xl">
                 <%= patient.heartRate %><span
                   class="text-black font-thin text-base"
@@ -138,12 +153,12 @@
           </div>
         </div>
         <div
-          class="rounded-xl flex flex-col justify-between bg-[#c8e4f1] w-full p-4 h-64"
+          class="rounded-xl flex flex-col justify-between bg-[#c8e4f1] w-full p-4 h-64 mt-2 lg:mt-0"
         >
           <div>
             <p class="font-bold text-xl">SPO2</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/o2.png" alt="" srcset="" />
+              <img src="/images/o2.png" alt="" srcset="" />
               <p class="font-bold text-[#64b278] text-5xl">
                 <%= patient.spo2 %><span class="text-black font-thin text-base"
                   >%</span
@@ -154,7 +169,7 @@
           <div>
             <p class="font-bold mt-2 text-xl">RR</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/rr.png" alt="" srcset="" />
+              <img src="/images/rr.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
                 <%= patient.rr %><span class="text-black font-thin text-base"
                   >bpm</span
@@ -164,12 +179,14 @@
           </div>
         </div>
       </div>
-      <div class="w-full flex gap-x-32 mt-4 bg-[#c8e4f1] p-4 rounded-xl">
+      <div
+        class="w-full flex flex-col lg:flex-row gap-x-32 lg:mt-4 mt-2 bg-[#c8e4f1] p-4 rounded-xl"
+      >
         <div class="w-full">
           <div class="w-full">
             <p class="font-bold text-xl">BMI</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/bmi.png" alt="" srcset="" />
+              <img src="/images/bmi.png" alt="" srcset="" />
               <p class="font-bold text-[#5daf70] text-5xl">
                 <%= patient.bmi %><span class="text-black font-thin text-base"
                   >kg/m2</span
@@ -180,7 +197,7 @@
           <div class="w-full mt-4">
             <p class="font-bold text-xl">Body Temperature</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/body-temperature.png" alt="" srcset="" />
+              <img src="/images/body-temperature.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
                 <%= patient.bodyTemperature %>°<span
                   class="text-black font-thin text-base"
@@ -194,7 +211,7 @@
           <div class="w-full">
             <p class="font-bold text-xl">Body Weight</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/body-weight.png" alt="" srcset="" />
+              <img src="/images/body-weight.png" alt="" srcset="" />
               <p class="font-bold text-[#a472b8] text-5xl">
                 <%= patient.bodyWeight %><span
                   class="text-black font-thin text-base"
@@ -206,7 +223,7 @@
           <div class="w-full mt-4">
             <p class="font-bold text-xl">Body Height</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/body-height.png" alt="" srcset="" />
+              <img src="/images/body-height.png" alt="" srcset="" />
               <p class="font-bold text-[#e4c478] text-5xl">
                 <%= patient.bodyHeight %><span
                   class="text-black font-thin text-base"
@@ -228,7 +245,7 @@
           <div>
             <p class="font-bold text-xl">SPO2</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/o2.png" alt="" srcset="" />
+              <img src="/images/o2.png" alt="" srcset="" />
               <p class="font-bold text-[#64b278] text-5xl">
                 99<span class="text-black font-thin text-base">%</span>
               </p>
@@ -237,7 +254,7 @@
           <div>
             <p class="font-bold mt-2 text-xl">RR</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/rr.png" alt="" srcset="" />
+              <img src="/images/rr.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
                 19<span class="text-black font-thin text-base">bpm</span>
               </p>
@@ -283,7 +300,7 @@
           <div>
             <p class="font-bold text-xl">Systolic</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/systolic.png" alt="" srcset="" />
+              <img src="/images/systolic.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
                 120<span class="text-black font-thin text-base">mmHg</span>
               </p>
@@ -292,7 +309,7 @@
           <div>
             <p class="font-bold text-xl">Diastolic</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/systolic.png" alt="" srcset="" />
+              <img src="/images/systolic.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
                 80<span class="text-black font-thin text-base">mmHg</span>
               </p>
@@ -301,7 +318,7 @@
           <div>
             <p class="font-bold text-xl">Mean Pulse</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/mean-pulse.png" alt="" srcset="" />
+              <img src="/images/mean-pulse.png" alt="" srcset="" />
               <p class="font-bold text-[#a472b8] text-5xl">
                 19<span class="text-black font-thin text-base">bpm</span>
               </p>
@@ -310,7 +327,7 @@
           <div>
             <p class="font-bold text-xl">Body Site</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/body-site.png" alt="" srcset="" />
+              <img src="/images/body-site.png" alt="" srcset="" />
               <p class="font-bold text-[#b7878d] text-5xl">
                 left<span class="text-black font-thin text-base">hand</span>
               </p>
@@ -323,7 +340,7 @@
           <div>
             <p class="font-bold text-xl">Blood Pressure</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/blood-pressure.png" alt="" srcset="" />
+              <img src="/images/blood-pressure.png" alt="" srcset="" />
               <p class="font-bold text-[#6472f8] text-5xl">
                 120/80<span class="text-black font-thin text-base">mmHg</span>
               </p>
@@ -332,7 +349,7 @@
           <div>
             <p class="font-bold mt-2 text-xl">Heart Rate</p>
             <div class="flex justify-between items-center mt-2">
-              <img src="images/heart-rate-2.png" alt="" srcset="" />
+              <img src="/images/heart-rate-2.png" alt="" srcset="" />
               <p class="font-bold text-[#e4c478] text-5xl">
                 90<span class="text-black font-thin text-base">bpm</span>
               </p>
@@ -356,9 +373,9 @@
       </div>
     </div>
 
-    <button class="flex items-center">
-      <img src="images/window.png" class="-mr-2" />
-      <img src="images/arrow-down.png" alt="" srcset="" />
+    <button class=";g:flex items-center hidden">
+      <img src="/images/window.png" class="-mr-2" />
+      <img src="/images/arrow-down.png" alt="" srcset="" />
     </button>
   </div>
 </main>

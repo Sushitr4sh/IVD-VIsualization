@@ -7,6 +7,7 @@ const patientSchema = new Schema({
   },
   patientId: {
     type: String,
+    unique: true,
   },
   gender: {
     type: String,
@@ -20,37 +21,45 @@ const patientSchema = new Schema({
     type: String,
     default: "",
   },
+  systolic: {
+    type: Number,
+    default: null,
+  },
+  diastolic: {
+    type: Number,
+    default: null,
+  },
   meanPulse: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   heartRate: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   spo2: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   rr: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   bmi: {
     type: String,
     default: "",
   },
   bodyTemperature: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   bodyWeight: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
   bodyHeight: {
-    type: String,
-    default: "",
+    type: Number,
+    default: null,
   },
 });
 

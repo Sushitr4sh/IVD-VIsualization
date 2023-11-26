@@ -1,0 +1,166 @@
+<% layout('layouts/boilerplate') -%>
+<div class="px-32 mt-16">
+  <h1 class="text-3xl font-bold">Update Patient Data</h1>
+  <p class="mt-2"><%= patient.fullName%> - <%= patient.patientId %></p>
+</div>
+<main class="px-32 w-full">
+  <form
+    action="/patients/<%= patient.patientId %>/add-data"
+    method="POST"
+    class="mt-8 w-full"
+  >
+    <div class="flex gap-x-4 w-full bg-[#91c8e4] p-4 rounded-lg">
+      <div class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4">
+        <div>
+          <label class="font-bold text-xl" for="systolic"
+            >Systolic
+            <span class="text-black font-thin text-base">(mmHg)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/systolic.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.systolic %>"
+              name="systolic"
+              id="systolic"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#e47278] text-5xl"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="font-bold text-xl" for="diastolic"
+            >Diastolic
+            <span class="text-black font-thin text-base">(mmHg)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/systolic.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.diastolic %>"
+              name="diastolic"
+              id="diastolic"
+              class="bg-transparent focus:outline-none font-bold text-[#e47278] w-full text-5xl"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="font-bold text-xl" for="heartRate"
+            >Heart Rate
+            <span class="text-black font-thin text-base">(bpm)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/heart-rate-2.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.heartRate %>"
+              name="heartRate"
+              id="heartRate"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#e4c478] text-5xl"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4">
+        <div>
+          <label class="font-bold text-xl" for="spo2"
+            >SPO2 <span class="text-black font-thin text-base">(%)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/o2.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.spo2 %>"
+              name="spo2"
+              id="spo2"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#64b278] text-5xl"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="font-bold text-xl" for="rr"
+            >RR <span class="text-black font-thin text-base">(bpm)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/rr.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.rr %>"
+              name="rr"
+              id="rr"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#e47278] text-5xl"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4">
+        <div>
+          <label class="font-bold text-xl" for="bmi"
+            >BMI
+            <span class="text-black font-thin text-base">(kg/m2)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/bmi.png" alt="" srcset="" />
+            <input
+              type="text"
+              value="<%= patient.bmi %>"
+              name="bmi"
+              id="bmi"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#5daf70] text-5xl"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="font-bold text-xl" for="bodyTemperature"
+            >bodyTemperature
+            <span class="text-black font-thin text-base">(C)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/body-temperature.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.bodyTemperature %>"
+              name="bodyTemperature"
+              id="bodyTemperature"
+              class="bg-transparent focus:outline-none font-bold text-[#e47278] w-full text-5xl"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="font-bold text-xl" for="bodyWeight"
+            >Body Weight
+            <span class="text-black font-thin text-base">(kg)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/body-weight.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.bodyWeight %>"
+              name="bodyWeight"
+              id="bodyWeight"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#a472b8] text-5xl"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="font-bold text-xl" for="bodyHeight"
+            >Body Height
+            <span class="text-black font-thin text-base">(cm)</span></label
+          >
+          <div class="flex items-center mt-2 gap-x-4">
+            <img src="/images/body-height.png" alt="" srcset="" />
+            <input
+              type="number"
+              value="<%= patient.bodyHeight %>"
+              name="bodyHeight"
+              id="bodyHeight"
+              class="bg-transparent focus:outline-none font-bold w-full text-[#e4c478] text-5xl"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end mt-4">
+      <button class="bg-[#91c8e4] rounded-md px-3 py-2 text-xl">Update</button>
+    </div>
+  </form>
+</main>
