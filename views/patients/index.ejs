@@ -102,7 +102,9 @@
   >
     <div class="w-full hidden" id="page1">
       <div class="flex-col lg:flex-row gap-x-4 w-full hidden lg:flex">
-        <div class="rounded-xl bg-[#c8e4f1] lg:w-[70%] lg:h-96 h-32"></div>
+        <div
+          class="rounded-xl bg-[#c8e4f1] lg:w-[70%] lg:h-96 h-32 flex items-center justify-center p-4"
+        ></div>
         <div
           class="rounded-xl bg-[#c8e4f1] lg:w-[30%] lg:h-96 h-32 mt-2 lg:mt-0"
         ></div>
@@ -247,7 +249,9 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/o2.png" alt="" srcset="" />
               <p class="font-bold text-[#64b278] text-5xl">
-                99<span class="text-black font-thin text-base">%</span>
+                <%= patient.spo2 %><span class="text-black font-thin text-base"
+                  >%</span
+                >
               </p>
             </div>
           </div>
@@ -256,7 +260,9 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/rr.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
-                19<span class="text-black font-thin text-base">bpm</span>
+                <%= patient.rr %><span class="text-black font-thin text-base"
+                  >bpm</span
+                >
               </p>
             </div>
           </div>
@@ -302,7 +308,10 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/systolic.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
-                120<span class="text-black font-thin text-base">mmHg</span>
+                <%= patient.systolic %><span
+                  class="text-black font-thin text-base"
+                  >mmHg</span
+                >
               </p>
             </div>
           </div>
@@ -311,7 +320,10 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/systolic.png" alt="" srcset="" />
               <p class="font-bold text-[#e47278] text-5xl">
-                80<span class="text-black font-thin text-base">mmHg</span>
+                <%= patient.diastolic %><span
+                  class="text-black font-thin text-base"
+                  >mmHg</span
+                >
               </p>
             </div>
           </div>
@@ -320,7 +332,10 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/mean-pulse.png" alt="" srcset="" />
               <p class="font-bold text-[#a472b8] text-5xl">
-                19<span class="text-black font-thin text-base">bpm</span>
+                <%= patient.meanPulse %><span
+                  class="text-black font-thin text-base"
+                  >bpm</span
+                >
               </p>
             </div>
           </div>
@@ -342,7 +357,10 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/blood-pressure.png" alt="" srcset="" />
               <p class="font-bold text-[#6472f8] text-5xl">
-                120/80<span class="text-black font-thin text-base">mmHg</span>
+                <%= patient.systolic %>/<%= patient.diastolic %><span
+                  class="text-black font-thin text-base"
+                  >mmHg</span
+                >
               </p>
             </div>
           </div>
@@ -351,7 +369,10 @@
             <div class="flex justify-between items-center mt-2">
               <img src="/images/heart-rate-2.png" alt="" srcset="" />
               <p class="font-bold text-[#e4c478] text-5xl">
-                90<span class="text-black font-thin text-base">bpm</span>
+                <%= patient.heartRate %><span
+                  class="text-black font-thin text-base"
+                  >bpm</span
+                >
               </p>
             </div>
           </div>
@@ -360,22 +381,92 @@
     </div>
 
     <div class="w-full hidden" id="page4">
-      <div class="flex gap-y-4 flex-col items-center">
-        <div
-          class="w-full bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4 h-96"
-        ></div>
-        <div
-          class="w-full bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4 h-96"
-        ></div>
-        <div
-          class="w-full bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4 h-96"
-        ></div>
+      <div
+        class="w-full flex flex-col lg:flex-row gap-x-32 lg:mt-4 mt-2 bg-[#c8e4f1] p-4 rounded-xl"
+      >
+        <div class="w-full">
+          <div class="w-full">
+            <p class="font-bold text-xl">BMI</p>
+            <div class="flex justify-between items-center mt-2">
+              <img src="/images/bmi.png" alt="" srcset="" />
+              <p class="font-bold text-[#5daf70] text-5xl">
+                <%= patient.bmi %><span class="text-black font-thin text-base"
+                  >kg/m2</span
+                >
+              </p>
+            </div>
+          </div>
+          <div class="w-full mt-4">
+            <p class="font-bold text-xl">Body Temperature</p>
+            <div class="flex justify-between items-center mt-2">
+              <img src="/images/body-temperature.png" alt="" srcset="" />
+              <p class="font-bold text-[#e47278] text-5xl">
+                <%= patient.bodyTemperature %>°<span
+                  class="text-black font-thin text-base"
+                  >C</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="w-full">
+          <div class="w-full">
+            <p class="font-bold text-xl">Body Weight</p>
+            <div class="flex justify-between items-center mt-2">
+              <img src="/images/body-weight.png" alt="" srcset="" />
+              <p class="font-bold text-[#a472b8] text-5xl">
+                <%= patient.bodyWeight %><span
+                  class="text-black font-thin text-base"
+                  >kg</span
+                >
+              </p>
+            </div>
+          </div>
+          <div class="w-full mt-4">
+            <p class="font-bold text-xl">Body Height</p>
+            <div class="flex justify-between items-center mt-2">
+              <img src="/images/body-height.png" alt="" srcset="" />
+              <p class="font-bold text-[#e4c478] text-5xl">
+                <%= patient.bodyHeight %><span
+                  class="text-black font-thin text-base"
+                  >cm</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <button class=";g:flex items-center hidden">
+    <div class="w-full hidden" id="page5">
+      <div class="w-full flex gap-x-4 h-72 bg-[#c8e4f1] p-4 rounded-xl">
+        <canvas id="myChart" class="w-full"></canvas>
+        <form action="/createdAt" method="POST">
+          <label for="createdAt" class="font-bold text-3xl block"
+            >Choose Date</label
+          >
+          <input
+            type="date"
+            name="createdAt"
+            id="createdAt"
+            class="mt-2 bg-transparent focus:outline-none"
+            onchange="updateChart()"
+            value="2021-11-20"
+          />
+        </form>
+      </div>
+    </div>
+
+    <button
+      class="lg:flex items-center hidden"
+      onclick="showPage('page5'); toggleRotation();"
+    >
       <img src="/images/window.png" class="-mr-2" />
-      <img src="/images/arrow-down.png" alt="" srcset="" />
+      <img
+        id="rotateImage"
+        src="/images/arrow-down.png"
+        class="transition duration-150 ease-in"
+      />
     </button>
   </div>
 </main>
@@ -384,6 +475,13 @@
   function changeImage(optionId, newSrc) {
     const image = document.getElementById(`${optionId}Image`);
     image.src = newSrc;
+  }
+</script>
+
+<script>
+  function toggleRotation() {
+    const rotateImage = document.getElementById("rotateImage");
+    rotateImage.classList.toggle("rotate-180");
   }
 </script>
 
@@ -400,5 +498,75 @@
     if (selectedPage) {
       selectedPage.style.display = "block";
     }
+  }
+</script>
+
+<script>
+  const ctx = document.getElementById("myChart");
+
+  const patient = {features: <%-JSON.stringify(patient)%>};
+
+  let newPatient = {
+        date: '2021-11-20',
+        time: [
+          '01:58:10.469',
+          '07:40:18.206',
+          '08:02:28.956',
+          '08:09:14.033',
+          '13:37:23.187'
+        ],
+        systolic: [ 126, 126, 126, 121, 118 ],
+        diastolic: [ 87, 85, 83, 81, 80 ],
+        meanPulse: [ 39, 41, 43, 40, 38 ]
+      };
+
+  var myChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: newPatient.time,
+      datasets: [
+        {
+          label: "Mean Pulse", // Name the first series
+          data: newPatient.meanPulse, // Specify the data values array
+          fill: false,
+          borderColor: "#6472f8", // Add custom color border (Line)
+          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+          borderWidth: 1, // Specify bar border width
+        },
+        {
+          label: "Systolic", // Name the first series
+          data: newPatient.systolic, // Specify the data values array
+          fill: false,
+          borderColor: "#2196f3", // Add custom color border (Line)
+          backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
+          borderWidth: 1, // Specify bar border width
+        },
+        {
+          label: "Diastolic", // Name the second series
+          data: newPatient.diastolic, // Specify the data values array for the second line
+          fill: false,
+          borderColor: "#ff5722", // Add custom color border for the second line
+          backgroundColor: "#ff5722", // Add custom color background for the second line
+          borderWidth: 1, // Specify bar border width for the second line
+        },
+      ],
+    },
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+    },
+  });
+
+  function updateChart() {
+    const selectedDate = document.getElementById("createdAt").value;
+    newPatient = patient.features.history.find(
+      (entry) => entry.date === selectedDate
+    );
+    console.log(myChart.data)
+    myChart.data.labels = newPatient.time;
+    myChart.data.datasets[0].data = newPatient.meanPulse;
+    myChart.data.datasets[1].data = newPatient.systolic;
+    myChart.data.datasets[2].data = newPatient.diastolic;
+    myChart.update();
   }
 </script>

@@ -49,6 +49,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
+app.get("/test", (req, res) => {
+  res.render("test");
+});
+
 app.get("/register", (req, res) => {
   res.render("patients/register-patient");
 });
@@ -99,6 +103,10 @@ app.post("/patients/:id/add-data", async (req, res) => {
     }
   );
   res.redirect(`/patients/${id}`);
+});
+
+app.post("/createdAt", (req, res) => {
+  res.send(req.body);
 });
 
 app.listen(port, () => {

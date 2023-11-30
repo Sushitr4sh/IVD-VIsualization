@@ -61,6 +61,33 @@ const patientSchema = new Schema({
     type: Number,
     default: null,
   },
+  history: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      systolic: [
+        {
+          type: Number,
+        },
+      ],
+      diastolic: [
+        {
+          type: Number,
+        },
+      ],
+      meanPulse: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model("Patient", patientSchema);
