@@ -243,4 +243,27 @@ inputArray.forEach((entry) => {
   }
 });
 
+/*~
+  Command to input to database:
+  db.patients.updateOne(
+  { patientId: 'P00001' },
+  {
+    $push: {
+      bloodPressureHistory: {
+        $each: [
+                  {
+                    date: '2021-11-21',
+                    time: [ '09:11:05.153', '09:18:36.791', '09:20:43.889', '13:37:17.137' ],
+                    systolic: [ 126, 116, 113, 132 ],
+                    diastolic: [ 84, 80, 77, 84 ],
+                    meanPulse: [ 42, 36, 36, 48 ]
+                  },
+                  {...},
+                ],
+      }
+    }
+  }
+);
+*/
+
 console.log(resultArray);

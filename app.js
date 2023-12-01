@@ -12,8 +12,6 @@ const mongoose = require("mongoose");
 
 const methodOverride = require("method-override");
 
-const helmet = require("helmet");
-
 const path = require("path");
 
 const moment = require("moment");
@@ -24,18 +22,13 @@ const Patient = require("./models/patient");
 /* EJS */
 const ejsMate = require("ejs-mate");
 
-/* Error Handlling */
-
-/* Connect Mongo */
-const MongoStore = require("connect-mongo");
-
 const dbUrl =
   process.env.DB_URL || "mongodb://127.0.0.1:27017/ivdVisualization";
 
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
-  console.log("Database Connected");
+  console.log(`Database Connected to ${dbUrl}`);
 }
 
 /* View Engine */
@@ -74,7 +67,7 @@ app.get("/patients/search", (req, res) => {
 app.get("/patients/:id", async (req, res) => {
   const { id } = req.params;
   const patient = await Patient.findOne({ patientId: id });
-  console.log(`This is query:` + patient);
+  console.log(patient);
   res.render("patients/index", { patient });
 });
 

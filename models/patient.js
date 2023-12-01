@@ -61,7 +61,7 @@ const patientSchema = new Schema({
     type: Number,
     default: null,
   },
-  history: [
+  bloodPressureHistory: [
     {
       date: {
         type: String,
@@ -82,6 +82,28 @@ const patientSchema = new Schema({
         },
       ],
       meanPulse: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
+  heartRateHistory: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      heartRate: [
+        {
+          type: Number,
+        },
+      ],
+      heartBeatCount: [
         {
           type: Number,
         },

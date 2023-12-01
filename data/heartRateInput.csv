@@ -1,0 +1,656 @@
+db.patients.updateOne(
+  { patientId: 'P00001' },
+  {
+    $push: {
+      heartRateHistory: {
+        $each: [
+  {
+    date: '2021-11-20',
+    time: [
+      '02:30:10.469',
+      '08:04:18.206',
+      '08:25:28.956',
+      '08:35:14.033',
+      '14:04:23.187',
+      '16:04:35.117',
+      '16:55:37.951'
+    ],
+    heartRate: [
+      66, 87, 68, 85,
+      83, 80, 73
+    ],
+    heartBeatCount: [
+      70, 71, 96, 82,
+      95, 94, 63
+    ]
+  },
+  {
+    date: '2021-11-21',
+    time: [ '09:35:05.153', '09:45:36.791', '09:55:43.889', '14:03:17.137' ],
+    heartRate: [ 73, 66, 61, 75 ],
+    heartBeatCount: [ 97, 79, 96, 94 ]
+  },
+  {
+    date: '2021-11-22',
+    time: [
+      '00:35:01.523',
+      '00:45:30.742',
+      '02:40:40.317',
+      '12:45:09.799',
+      '12:50:51.395'
+    ],
+    heartRate: [ 90, 67, 74, 78, 72 ],
+    heartBeatCount: [ 79, 100, 65, 99, 72 ]
+  },
+  {
+    date: '2021-11-23',
+    time: [
+      '01:45:08.653',
+      '01:50:17.486',
+      '16:35:32.996',
+      '16:40:13.184',
+      '23:40:05.371'
+    ],
+    heartRate: [ 73, 86, 89, 76, 78 ],
+    heartBeatCount: [ 93, 61, 93, 92, 85 ]
+  },
+  {
+    date: '2021-11-24',
+    time: [ '03:07:47.800', '08:59:57.992' ],
+    heartRate: [ 63, 89 ],
+    heartBeatCount: [ 61, 85 ]
+  },
+  {
+    date: '2021-11-25',
+    time: [ '12:40:40.771', '12:45:01.165', '12:50:21.941' ],
+    heartRate: [ 89, 83, 73 ],
+    heartBeatCount: [ 93, 77, 69 ]
+  },
+  {
+    date: '2021-11-26',
+    time: [ '09:50:01.313' ],
+    heartRate: [ 88 ],
+    heartBeatCount: [ 76 ]
+  },
+  {
+    date: '2021-11-27',
+    time: [ '02:50:48.748', '11:40:24.419', '12:09:41.025' ],
+    heartRate: [ 62, 83, 72 ],
+    heartBeatCount: [ 70, 81, 61 ]
+  },
+  {
+    date: '2021-11-28',
+    time: [ '05:46:48.633', '16:06:30.501', '23:04:37.913' ],
+    heartRate: [ 81, 87, 88 ],
+    heartBeatCount: [ 94, 82, 62 ]
+  },
+  {
+    date: '2021-11-29',
+    time: [ '00:50:46.210', '12:55:56.090', '12:59:38.536', '13:05:01.473' ],
+    heartRate: [ 61, 68, 72, 60 ],
+    heartBeatCount: [ 79, 80, 91, 93 ]
+  },
+  {
+    date: '2021-11-30',
+    time: [ '06:20:30.774', '10:22:50.177' ],
+    heartRate: [ 65, 90 ],
+    heartBeatCount: [ 100, 61 ]
+  },
+  {
+    date: '2021-12-01',
+    time: [ '15:20:01.134', '23:50:02.515' ],
+    heartRate: [ 75, 64 ],
+    heartBeatCount: [ 100, 60 ]
+  },
+  {
+    date: '2021-12-03',
+    time: [ '03:25:55.560', '06:30:11.114', '06:35:30.408' ],
+    heartRate: [ 70, 83, 88 ],
+    heartBeatCount: [ 98, 90, 69 ]
+  },
+  {
+    date: '2021-12-04',
+    time: [ '00:25:28.832', '07:35:55.926', '07:40:33.729', '09:20:23.281' ],
+    heartRate: [ 78, 61, 68, 65 ],
+    heartBeatCount: [ 84, 96, 96, 88 ]
+  },
+  {
+    date: '2021-12-06',
+    time: [ '11:55:44.570' ],
+    heartRate: [ 60 ],
+    heartBeatCount: [ 63 ]
+  },
+  {
+    date: '2021-12-07',
+    time: [ '15:12:35.507', '15:18:24.142', '19:55:49.988' ],
+    heartRate: [ 73, 87, 65 ],
+    heartBeatCount: [ 83, 92, 82 ]
+  },
+  {
+    date: '2021-12-09',
+    time: [ '00:40:11.104' ],
+    heartRate: [ 63 ],
+    heartBeatCount: [ 64 ]
+  },
+  {
+    date: '2021-12-12',
+    time: [ '02:04:17.975' ],
+    heartRate: [ 60 ],
+    heartBeatCount: [ 83 ]
+  },
+  {
+    date: '2021-12-14',
+    time: [ '01:50:25.782' ],
+    heartRate: [ 78 ],
+    heartBeatCount: [ 100 ]
+  },
+  {
+    date: '2021-12-17',
+    time: [ '01:12:46.094' ],
+    heartRate: [ 73 ],
+    heartBeatCount: [ 65 ]
+  },
+  {
+    date: '2021-12-20',
+    time: [ '23:59:08.154' ],
+    heartRate: [ 60 ],
+    heartBeatCount: [ 88 ]
+  },
+  {
+    date: '2021-12-21',
+    time: [ '00:22:30.256', '00:29:23.171' ],
+    heartRate: [ 80, 84 ],
+    heartBeatCount: [ 67, 94 ]
+  },
+  {
+    date: '2021-12-23',
+    time: [ '08:59:59.707' ],
+    heartRate: [ 81 ],
+    heartBeatCount: [ 96 ]
+  },
+  {
+    date: '2021-12-24',
+    time: [ '00:51:02.258' ],
+    heartRate: [ 90 ],
+    heartBeatCount: [ 76 ]
+  },
+  {
+    date: '2021-12-25',
+    time: [ '14:04:03.623' ],
+    heartRate: [ 70 ],
+    heartBeatCount: [ 86 ]
+  },
+  {
+    date: '2021-12-30',
+    time: [ '09:59:41.490' ],
+    heartRate: [ 79 ],
+    heartBeatCount: [ 71 ]
+  },
+  {
+    date: '2022-01-01',
+    time: [ '05:22:23.874' ],
+    heartRate: [ 84 ],
+    heartBeatCount: [ 76 ]
+  },
+  {
+    date: '2022-01-03',
+    time: [ '14:40:20.940', '14:55:47.445', '18:23:32.804' ],
+    heartRate: [ 61, 68, 90 ],
+    heartBeatCount: [ 95, 100, 67 ]
+  },
+  {
+    date: '2022-01-04',
+    time: [ '15:20:31.900', '15:25:27.412' ],
+    heartRate: [ 89, 66 ],
+    heartBeatCount: [ 63, 83 ]
+  },
+  {
+    date: '2022-01-05',
+    time: [ '04:35:27.756' ],
+    heartRate: [ 62 ],
+    heartBeatCount: [ 68 ]
+  },
+  {
+    date: '2022-01-06',
+    time: [ '17:15:18.196' ],
+    heartRate: [ 64 ],
+    heartBeatCount: [ 97 ]
+  },
+  {
+    date: '2022-01-16',
+    time: [ '02:59:00.304', '05:25:31.058', '09:25:50.310' ],
+    heartRate: [ 77, 78, 67 ],
+    heartBeatCount: [ 61, 74, 66 ]
+  },
+  {
+    date: '2022-01-17',
+    time: [ '01:09:41.624' ],
+    heartRate: [ 62 ],
+    heartBeatCount: [ 88 ]
+  },
+  {
+    date: '2022-01-19',
+    time: [ '23:43:58.682' ],
+    heartRate: [ 83 ],
+    heartBeatCount: [ 82 ]
+  },
+  {
+    date: '2022-01-20',
+    time: [ '00:59:38.884', '10:43:16.740' ],
+    heartRate: [ 73, 83 ],
+    heartBeatCount: [ 71, 60 ]
+  },
+  {
+    date: '2022-01-21',
+    time: [ '00:47:22.900', '00:50:21.555' ],
+    heartRate: [ 82, 78 ],
+    heartBeatCount: [ 86, 96 ]
+  },
+  {
+    date: '2022-01-28',
+    time: [ '02:59:26.539', '03:04:46.888', '13:39:38.685' ],
+    heartRate: [ 70, 81, 80 ],
+    heartBeatCount: [ 82, 64, 95 ]
+  },
+  {
+    date: '2022-01-29',
+    time: [ '14:29:25.907', '14:35:20.606', '23:09:48.827' ],
+    heartRate: [ 80, 82, 67 ],
+    heartBeatCount: [ 60, 87, 70 ]
+  },
+  {
+    date: '2022-01-30',
+    time: [ '07:22:17.119', '08:19:29.387', '14:35:05.663' ],
+    heartRate: [ 72, 82, 66 ],
+    heartBeatCount: [ 78, 97, 76 ]
+  },
+  {
+    date: '2022-02-01',
+    time: [ '06:40:13.060', '10:45:42.397' ],
+    heartRate: [ 74, 61 ],
+    heartBeatCount: [ 72, 76 ]
+  },
+  {
+    date: '2022-02-02',
+    time: [ '14:50:01.414', '14:59:41.379' ],
+    heartRate: [ 69, 64 ],
+    heartBeatCount: [ 75, 66 ]
+  },
+  {
+    date: '2022-02-03',
+    time: [ '06:15:29.324', '06:20:05.102', '06:44:01.861', '16:09:34.848' ],
+    heartRate: [ 64, 87, 82, 60 ],
+    heartBeatCount: [ 64, 80, 89, 84 ]
+  },
+  {
+    date: '2022-02-04',
+    time: [ '05:19:51.666' ],
+    heartRate: [ 80 ],
+    heartBeatCount: [ 89 ]
+  },
+  {
+    date: '2022-02-05',
+    time: [ '11:22:44.260' ],
+    heartRate: [ 78 ],
+    heartBeatCount: [ 91 ]
+  },
+  {
+    date: '2022-02-06',
+    time: [ '14:09:30.278' ],
+    heartRate: [ 63 ],
+    heartBeatCount: [ 62 ]
+  },
+  {
+    date: '2022-02-08',
+    time: [ '17:09:59.124', '17:15:41.590' ],
+    heartRate: [ 81, 77 ],
+    heartBeatCount: [ 89, 85 ]
+  },
+  {
+    date: '2022-02-09',
+    time: [ '01:35:02.232' ],
+    heartRate: [ 86 ],
+    heartBeatCount: [ 99 ]
+  },
+  {
+    date: '2022-02-12',
+    time: [ '12:59:26.273' ],
+    heartRate: [ 64 ],
+    heartBeatCount: [ 74 ]
+  },
+  {
+    date: '2022-02-14',
+    time: [ '01:30:38.098', '14:30:04.917' ],
+    heartRate: [ 81, 84 ],
+    heartBeatCount: [ 86, 92 ]
+  },
+  {
+    date: '2022-02-16',
+    time: [ '03:35:49.618', '06:45:54.608' ],
+    heartRate: [ 89, 69 ],
+    heartBeatCount: [ 83, 68 ]
+  },
+  {
+    date: '2022-02-17',
+    time: [ '00:35:40.381' ],
+    heartRate: [ 69 ],
+    heartBeatCount: [ 72 ]
+  },
+  {
+    date: '2022-02-18',
+    time: [ '05:35:52.612' ],
+    heartRate: [ 70 ],
+    heartBeatCount: [ 72 ]
+  },
+  {
+    date: '2022-02-19',
+    time: [ '08:35:11.203' ],
+    heartRate: [ 74 ],
+    heartBeatCount: [ 67 ]
+  },
+  {
+    date: '2022-02-20',
+    time: [ '05:35:31.959', '05:35:44.513' ],
+    heartRate: [ 61, 77 ],
+    heartBeatCount: [ 60, 72 ]
+  },
+  {
+    date: '2022-02-22',
+    time: [ '00:40:49.585' ],
+    heartRate: [ 66 ],
+    heartBeatCount: [ 96 ]
+  },
+  {
+    date: '2022-02-23',
+    time: [ '07:25:22.130' ],
+    heartRate: [ 72 ],
+    heartBeatCount: [ 80 ]
+  },
+  {
+    date: '2022-02-26',
+    time: [ '21:04:45.702', '21:06:35.723' ],
+    heartRate: [ 81, 60 ],
+    heartBeatCount: [ 92, 90 ]
+  },
+  {
+    date: '2022-03-01',
+    time: [ '04:35:10.945' ],
+    heartRate: [ 86 ],
+    heartBeatCount: [ 74 ]
+  },
+  {
+    date: '2022-03-05',
+    time: [ '02:04:19.887' ],
+    heartRate: [ 80 ],
+    heartBeatCount: [ 85 ]
+  },
+  {
+    date: '2022-03-18',
+    time: [ '01:08:22.209' ],
+    heartRate: [ 89 ],
+    heartBeatCount: [ 71 ]
+  },
+  {
+    date: '2022-03-19',
+    time: [ '05:50:54.404', '14:25:25.181' ],
+    heartRate: [ 67, 73 ],
+    heartBeatCount: [ 60, 99 ]
+  },
+  {
+    date: '2022-03-20',
+    time: [
+      '02:35:06.752',
+      '02:40:16.308',
+      '13:09:35.918',
+      '21:43:15.251',
+      '21:49:10.929'
+    ],
+    heartRate: [ 61, 71, 81, 72, 86 ],
+    heartBeatCount: [ 90, 70, 75, 95, 100 ]
+  },
+  {
+    date: '2022-03-21',
+    time: [ '13:57:27.720', '22:04:15.732', '23:46:22.081' ],
+    heartRate: [ 81, 86, 63 ],
+    heartBeatCount: [ 98, 66, 96 ]
+  },
+  {
+    date: '2022-03-22',
+    time: [ '04:49:14.705', '20:19:01.613', '20:45:44.068' ],
+    heartRate: [ 72, 87, 72 ],
+    heartBeatCount: [ 85, 81, 100 ]
+  },
+  {
+    date: '2022-03-26',
+    time: [ '17:45:43.645', '21:45:02.896' ],
+    heartRate: [ 73, 89 ],
+    heartBeatCount: [ 60, 61 ]
+  },
+  {
+    date: '2022-03-28',
+    time: [ '19:59:59.004', '20:05:32.282', '23:07:51.439' ],
+    heartRate: [ 75, 75, 72 ],
+    heartBeatCount: [ 88, 83, 93 ]
+  },
+  {
+    date: '2022-03-29',
+    time: [ '00:40:58.834', '00:43:14.199', '00:49:06.877', '01:59:23.643' ],
+    heartRate: [ 83, 63, 70, 73 ],
+    heartBeatCount: [ 74, 85, 60, 62 ]
+  },
+  {
+    date: '2022-03-30',
+    time: [ '02:10:45.205' ],
+    heartRate: [ 70 ],
+    heartBeatCount: [ 85 ]
+  },
+  {
+    date: '2022-03-31',
+    time: [ '08:50:39.546', '09:10:09.079' ],
+    heartRate: [ 75, 75 ],
+    heartBeatCount: [ 96, 60 ]
+  },
+  {
+    date: '2022-04-03',
+    time: [ '21:30:28.628' ],
+    heartRate: [ 76 ],
+    heartBeatCount: [ 95 ]
+  },
+  {
+    date: '2022-04-06',
+    time: [ '13:50:44.954' ],
+    heartRate: [ 72 ],
+    heartBeatCount: [ 91 ]
+  },
+  {
+    date: '2022-04-07',
+    time: [ '16:40:35.367' ],
+    heartRate: [ 71 ],
+    heartBeatCount: [ 75 ]
+  },
+  {
+    date: '2022-04-09',
+    time: [ '00:45:41.700', '04:05:41.873', '04:35:39.249' ],
+    heartRate: [ 88, 75, 81 ],
+    heartBeatCount: [ 91, 85, 84 ]
+  },
+  {
+    date: '2022-04-10',
+    time: [ '12:35:53.604' ],
+    heartRate: [ 78 ],
+    heartBeatCount: [ 90 ]
+  },
+  {
+    date: '2022-04-12',
+    time: [
+      '00:59:15.248',
+      '01:05:29.779',
+      '01:07:51.617',
+      '01:25:07.675',
+      '01:30:40.953',
+      '01:45:07.007'
+    ],
+    heartRate: [ 76, 83, 61, 84, 60, 89 ],
+    heartBeatCount: [ 88, 91, 95, 66, 71, 84 ]
+  },
+  {
+    date: '2022-04-20',
+    time: [ '10:45:27.281' ],
+    heartRate: [ 76 ],
+    heartBeatCount: [ 60 ]
+  },
+  {
+    date: '2022-04-21',
+    time: [ '05:25:48.301' ],
+    heartRate: [ 62 ],
+    heartBeatCount: [ 76 ]
+  },
+  {
+    date: '2022-04-24',
+    time: [ '15:30:02.335' ],
+    heartRate: [ 84 ],
+    heartBeatCount: [ 82 ]
+  },
+  {
+    date: '2022-04-27',
+    time: [ '12:45:43.297', '19:40:21.438' ],
+    heartRate: [ 87, 87 ],
+    heartBeatCount: [ 62, 100 ]
+  },
+  {
+    date: '2022-04-28',
+    time: [ '20:40:07.185' ],
+    heartRate: [ 60 ],
+    heartBeatCount: [ 86 ]
+  },
+  {
+    date: '2022-04-29',
+    time: [ '10:30:47.023' ],
+    heartRate: [ 85 ],
+    heartBeatCount: [ 77 ]
+  },
+  {
+    date: '2022-05-01',
+    time: [ '08:35:27.109' ],
+    heartRate: [ 87 ],
+    heartBeatCount: [ 81 ]
+  },
+  {
+    date: '2022-05-02',
+    time: [ '05:10:30.464' ],
+    heartRate: [ 86 ],
+    heartBeatCount: [ 64 ]
+  },
+  {
+    date: '2022-05-05',
+    time: [ '02:25:23.955' ],
+    heartRate: [ 66 ],
+    heartBeatCount: [ 80 ]
+  },
+  {
+    date: '2022-05-11',
+    time: [ '19:26:15.335' ],
+    heartRate: [ 61 ],
+    heartBeatCount: [ 76 ]
+  },
+  {
+    date: '2022-05-13',
+    time: [ '14:26:48.583' ],
+    heartRate: [ 66 ],
+    heartBeatCount: [ 86 ]
+  },
+  {
+    date: '2022-05-16',
+    time: [ '07:50:55.361', '07:56:28.542' ],
+    heartRate: [ 76, 81 ],
+    heartBeatCount: [ 65, 70 ]
+  },
+  {
+    date: '2022-05-17',
+    time: [ '01:10:32.988' ],
+    heartRate: [ 74 ],
+    heartBeatCount: [ 63 ]
+  },
+  {
+    date: '2022-05-21',
+    time: [ '19:10:12.269', '19:15:05.146' ],
+    heartRate: [ 84, 82 ],
+    heartBeatCount: [ 77, 96 ]
+  },
+  {
+    date: '2022-05-24',
+    time: [ '01:10:23.096' ],
+    heartRate: [ 62 ],
+    heartBeatCount: [ 78 ]
+  },
+  {
+    date: '2022-05-26',
+    time: [ '17:25:20.205', '18:15:51.415' ],
+    heartRate: [ 76, 72 ],
+    heartBeatCount: [ 94, 75 ]
+  },
+  {
+    date: '2022-05-27',
+    time: [ '08:15:53.875', '09:35:20.016' ],
+    heartRate: [ 75, 73 ],
+    heartBeatCount: [ 88, 80 ]
+  },
+  {
+    date: '2022-05-28',
+    time: [ '02:40:42.507' ],
+    heartRate: [ 81 ],
+    heartBeatCount: [ 72 ]
+  },
+  {
+    date: '2022-06-03',
+    time: [ '18:50:39.248' ],
+    heartRate: [ 81 ],
+    heartBeatCount: [ 61 ]
+  },
+  {
+    date: '2022-06-07',
+    time: [ '01:13:00.168' ],
+    heartRate: [ 79 ],
+    heartBeatCount: [ 83 ]
+  },
+  {
+    date: '2022-07-20',
+    time: [ '05:45:44.756' ],
+    heartRate: [ 66 ],
+    heartBeatCount: [ 88 ]
+  },
+  {
+    date: '2022-07-27',
+    time: [ '22:40:18.873' ],
+    heartRate: [ 85 ],
+    heartBeatCount: [ 100 ]
+  },
+  {
+    date: '2022-08-01',
+    time: [ '01:25:17.252' ],
+    heartRate: [ 85 ],
+    heartBeatCount: [ 75 ]
+  },
+  {
+    date: '2022-08-03',
+    time: [ '05:45:28.711', '12:20:15.851' ],
+    heartRate: [ 60, 62 ],
+    heartBeatCount: [ 74, 80 ]
+  },
+  {
+    date: '2022-08-05',
+    time: [
+      '05:40:04.802',
+      '05:45:48.626',
+      '05:50:51.155',
+      '05:56:48.899',
+      '06:20:38.088'
+    ],
+    heartRate: [ 76, 87, 87, 75, 62 ],
+    heartBeatCount: [ 89, 94, 60, 60, 98 ]
+  },
+                ],
+      }
+    }
+  }
+);
