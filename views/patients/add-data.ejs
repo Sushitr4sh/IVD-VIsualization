@@ -101,7 +101,8 @@
           <div class="flex items-center mt-2 gap-x-4">
             <img src="/images/bmi.png" alt="" srcset="" />
             <input
-              type="text"
+              type="number"
+              step="0.1"
               value="<%= patient.bmi %>"
               name="bmi"
               id="bmi"
@@ -118,6 +119,7 @@
             <img src="/images/body-temperature.png" alt="" srcset="" />
             <input
               type="number"
+              step="0.1"
               value="<%= patient.bodyTemperature %>"
               name="bodyTemperature"
               id="bodyTemperature"

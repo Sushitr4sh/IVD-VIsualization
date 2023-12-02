@@ -67,7 +67,6 @@ app.get("/patients/search", (req, res) => {
 app.get("/patients/:id", async (req, res) => {
   const { id } = req.params;
   const patient = await Patient.findOne({ patientId: id });
-  console.log(patient);
   res.render("patients/index", { patient });
 });
 

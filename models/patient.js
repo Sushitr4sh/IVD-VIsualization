@@ -46,7 +46,7 @@ const patientSchema = new Schema({
     default: null,
   },
   bmi: {
-    type: String,
+    type: Number,
     default: "",
   },
   bodyTemperature: {
@@ -61,6 +61,23 @@ const patientSchema = new Schema({
     type: Number,
     default: null,
   },
+  sleepStageHistory: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      stage: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
   bloodPressureHistory: [
     {
       date: {
@@ -104,6 +121,62 @@ const patientSchema = new Schema({
         },
       ],
       heartBeatCount: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
+  heightWeightHistory: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      height: [
+        {
+          type: Number,
+        },
+      ],
+      weight: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
+  bmiHistory: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      bmi: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
+  temperatureHistory: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      temperature: [
         {
           type: Number,
         },
