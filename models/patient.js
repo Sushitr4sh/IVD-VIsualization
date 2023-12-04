@@ -183,6 +183,28 @@ const patientSchema = new Schema({
       ],
     },
   ],
+  rrSpo2History: [
+    {
+      date: {
+        type: String,
+      },
+      time: [
+        {
+          type: String,
+        },
+      ],
+      rr: [
+        {
+          type: Number,
+        },
+      ],
+      spo2: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model("Patient", patientSchema);

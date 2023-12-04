@@ -530,6 +530,36 @@
       </button>
     </div>
 
+    <div class="w-full hidden gap-x-2 items-start" id="page6">
+      <div class="w-full">
+        <div
+          class="rounded-xl bg-[#c8e4f1] lg:w-full h-80 flex flex-col items-start pt-4 px-5 pb-10"
+        >
+          <div class="flex items-center gap-x-2">
+            <label for="rrSpo2CreatedAt" class="font-semibold"
+              >Choose Date:</label
+            >
+            <input
+              type="date"
+              name="rrSpo2CreatedAt"
+              id="rrSpo2CreatedAt"
+              class="bg-transparent focus:outline-none"
+              onchange="updateRrSpo2Chart()"
+              value="2021-11-20"
+            />
+          </div>
+          <canvas id="rrSpo2Chart" class="w-full"></canvas>
+        </div>
+        <div class="w-full bg-[#c8e4f1] p-4 rounded-xl mt-4"></div>
+      </div>
+      <button
+        class="lg:flex items-center hidden"
+        onclick="showPage('page2'); toggleRotation();"
+      >
+        <img src="/images/window.png" class="-mr-2" />
+      </button>
+    </div>
+
     <div class="w-full hidden gap-x-2 items-start" id="page7">
       <div class="w-full">
         <div class="w-full bg-[#c8e4f1] p-4 rounded-xl">
@@ -747,6 +777,64 @@
       sleepStageChart.data.datasets[0].data = null;
     }
     sleepStageChart.update();
+  }
+
+  /* rrSpo2 */
+  const rrSpo2Ctx = document.getElementById("rrSpo2Chart");
+  let rrSpo2Default = {
+    date: '2021-11-20',
+    time: [ '09:35:05.153' ],
+    rr: [ 12 ],
+    spo2: [ 73 ]
+  };
+
+  var rrSpo2Chart = new Chart(rrSpo2Ctx, {
+    type: "line",
+    data: {
+      labels: rrSpo2Default.time,
+      datasets: [
+        {
+          label: "rr", // Name the first series
+          data: rrSpo2Default.rr, // Specify the data values array
+          fill: false,
+          borderColor: "#6472f8", // Add custom color border (Line)
+          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+          borderWidth: 1, // Specify bar border width
+        },
+        {
+          label: "spo2", // Name the first series
+          data: rrSpo2Default.spo2, // Specify the data values array
+          fill: false,
+          borderColor: "#6472f8", // Add custom color border (Line)
+          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+          borderWidth: 1, // Specify bar border width
+        },
+      ],
+    },
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+    },
+  });
+
+  function updateRrSpo2Chart() {
+    const selectedDate = document.getElementById(
+      "rrSpo2CreatedAt"
+    ).value;
+    rrSpo2Default = patient.features.rrSpo2History.find(
+      (entry) => entry.date === selectedDate
+    );
+    console.log(rrSpo2Default)
+    if(rrSpo2Default){
+      rrSpo2Chart.data.labels = rrSpo2Default.time;
+      rrSpo2Chart.data.datasets[0].data = rrSpo2Default.rr;
+      rrSpo2Chart.data.datasets[1].data = rrSpo2Default.spo2;
+    } else {
+      rrSpo2Chart.data.labels = null;
+      rrSpo2Chart.data.datasets[0].data = null;
+      rrSpo2Chart.data.datasets[1].data = null;
+    }
+    rrSpo2Chart.update();
   }
 
   /* Sleep */
@@ -1036,7 +1124,7 @@
       labels: bmiDefault.time,
       datasets: [
         {
-          label: "Height", // Name the first series
+          label: "BMI", // Name the first series
           data: bmiDefault.bmi, // Specify the data values array
           fill: false,
           borderColor: "#6472f8", // Add custom color border (Line)
@@ -1091,7 +1179,7 @@
       labels: temperatureDefault.time,
       datasets: [
         {
-          label: "Height", // Name the first series
+          label: "Temperature", // Name the first series
           data: temperatureDefault.temperature, // Specify the data values array
           fill: false,
           borderColor: "#6472f8", // Add custom color border (Line)
