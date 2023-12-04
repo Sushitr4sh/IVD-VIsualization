@@ -61,9 +61,10 @@ app.get("/patients/search", (req, res) => {
   res.render("patients/search-patient");
 });
 
-/* app.post("/patients/search/:id", (req, res) => {
-  res.redirect("/chats");
-}); */
+app.post("/patients/search", async (req, res) => {
+  const { patientId } = req.body;
+  res.redirect(`/patients/${patientId}`);
+});
 
 app.get("/patients/:id", async (req, res) => {
   const { id } = req.params;
