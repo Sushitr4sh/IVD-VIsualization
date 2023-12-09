@@ -978,6 +978,7 @@
       (entry) => entry.date === selectedDate
     );
     if (sleepDefault) {
+      sleepChart.data.labels = sleepLabels;
       sleepChart.data.datasets[0].data = sleepDefault.sleep;
     } else {
       sleepChart.data.labels = null;
