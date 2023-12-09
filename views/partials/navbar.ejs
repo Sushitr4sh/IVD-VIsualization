@@ -1,7 +1,15 @@
 <nav
   class="bg-[#749bc2] lg:px-8 px-2 py-2 text-white flex justify-between items-center w-full"
 >
+  <% if(patient.patientId) { %>
+  <a
+    href="/patients/<%= patient.patientId %>"
+    class="lg:text-2xl text-xl font-bold"
+    >IVD Visualization</a
+  >
+  <% } else { %>
   <h1 class="lg:text-2xl text-xl font-bold">IVD Visualization</h1>
+  <% } %>
   <form
     class="flex items-center gap-x-2 lg:w-72"
     action="/patients/search"
@@ -9,10 +17,12 @@
   >
     <input
       type="text"
-      class="rounded-2xl font-thin py-1 text-black bg-[#91c8e4] hidden lg:block px-4 w-full focus:outline-none"
+      class="rounded-2xl font-thin py-[0.10rem] lg:py-1 text-black bg-[#91c8e4] block px-2 lg:px-4 w-full focus:outline-none"
       name="patientId"
       placeholder="Search Patient ID..."
     />
-    <img src="/images/setting.png" class="lg:w-6 w-5" />
+    <a href="/setting/<%= patient.patientId %>"
+      ><img src="/images/setting.png" class="lg:w-6 w-5"
+    /></a>
   </form>
 </nav>

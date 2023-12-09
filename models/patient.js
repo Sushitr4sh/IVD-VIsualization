@@ -17,6 +17,12 @@ const patientSchema = new Schema({
     type: Date,
     required: true,
   },
+  roomNumber: {
+    type: String,
+  },
+  bedNumber: {
+    type: String,
+  },
   bloodPressure: {
     type: String,
     default: "",
@@ -61,6 +67,18 @@ const patientSchema = new Schema({
     type: Number,
     default: null,
   },
+  sleepHistory: [
+    {
+      date: {
+        type: String,
+      },
+      sleep: [
+        {
+          type: Number,
+        },
+      ],
+    },
+  ],
   sleepStageHistory: [
     {
       date: {
@@ -73,7 +91,7 @@ const patientSchema = new Schema({
       ],
       stage: [
         {
-          type: Number,
+          type: String,
         },
       ],
     },

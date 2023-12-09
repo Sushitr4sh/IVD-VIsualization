@@ -72,10 +72,31 @@ app.get("/patients/:id", async (req, res) => {
   res.render("patients/index", { patient });
 });
 
+app.get("/setting/:id", async (req, res) => {
+  const { id } = req.params;
+  const patient = await Patient.findOne({ patientId: id });
+  res.render("patients/setting", { patient });
+});
+
 app.get("/patients/:id/add-data", async (req, res) => {
   const { id } = req.params;
   const patient = await Patient.findOne({ patientId: id });
   res.render("patients/add-data", { patient });
+});
+
+app.get("/patients/:id/edit-profile", async (req, res) => {
+  const { id } = req.params;
+  const patient = await Patient.findOne({ patientId: id });
+  res.render("patients/edit-profile", { patient });
+});
+
+app.put("/patients/:id/edit-profile", async (req, res) => {
+  const { id } = req.params;
+  const patient = await Patient.findOne({ patientId: id });
+  patient.roomNumber = req.body.roomNumber;
+  patient.bedNumber = req.body.bedNumber;
+  await patient.save();
+  res.redirect(`/patients/${id}`);
 });
 
 app.post("/patients/:id/add-data", async (req, res) => {

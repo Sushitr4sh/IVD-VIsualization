@@ -1,0 +1,51 @@
+<% layout('layouts/boilerplate') -%>
+<div class="px-4 lg:px-32 mt-16">
+  <h1 class="text-3xl font-bold">Edit Profile</h1>
+  <p class="mt-2"><%= patient.fullName%> - <%= patient.patientId %></p>
+</div>
+<main class="px-4 lg:px-32 w-full mt-6">
+  <form
+    action="/patients/<%= patient.patientId %>/edit-profile?_method=PUT"
+    method="POST"
+  >
+    <div>
+      <label for="fullName" class="block font-semibold text-xl"
+        >Full Name</label
+      >
+      <input
+        type="text"
+        name="fullName"
+        id="fullName"
+        class="focus:outline-none w-full lg:w-auto bg-[#91c8e4] px-2 py-1 rounded-md mt-1"
+        value="<%= patient.fullName %>"
+      />
+    </div>
+    <div class="mt-2">
+      <label for="roomNumber" class="block font-semibold text-xl"
+        >Room Number</label
+      >
+      <input
+        type="text"
+        name="roomNumber"
+        id="roomNumber"
+        class="focus:outline-none w-full lg:w-auto bg-[#91c8e4] px-2 py-1 rounded-md mt-1"
+        value="<%= patient.roomNumber  %>"
+      />
+    </div>
+    <div class="mt-2">
+      <label for="bedNumber" class="block font-semibold text-xl"
+        >Bed Number</label
+      >
+      <input
+        type="text"
+        name="bedNumber"
+        id="bedNumber"
+        class="focus:outline-none w-full lg:w-auto bg-[#91c8e4] px-2 py-1 rounded-md mt-1"
+        value="<%= patient.bedNumber %>"
+      />
+    </div>
+    <button class="px-3 py-2 text-white font-bold rounded-lg bg-[#749bc2] mt-4">
+      UPDATE
+    </button>
+  </form>
+</main>

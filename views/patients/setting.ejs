@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate') -%>
+<div class="px-4 lg:px-32 mt-16">
+  <h1 class="text-3xl font-bold">Settings</h1>
+  <p class="mt-2"><%= patient.fullName%> - <%= patient.patientId %></p>
+</div>
+<main class="px-4 lg:px-32 w-full mt-6">
+  <a
+    href="/patients/<%= patient.patientId %>/add-data"
+    class="block text-3xl font-semibold text-[#749bc2] hover:underline mb-2"
+    >Update patient data</a
+  >
+  <a
+    href="/patients/<%= patient.patientId %>/edit-profile"
+    class="text-3xl font-semibold text-[#749bc2] hover:underline"
+    >Edit patient profile</a
+  >
+</main>

@@ -14,7 +14,6 @@
       <div class="font-thin">
         <div class="lg:flex lg:items-center lg:gap-x-2">
           <p class="text-center lg:text-left"><%= patient.fullName %></p>
-          <img src="/images/edit-name.png" class="w-6 hidden lg:inline-block" />
         </div>
         <p class="text-center lg:text-left">ID: <%= patient.patientId %></p>
       </div>
@@ -39,15 +38,17 @@
       <div>
         <p class="font-bold">Room No.</p>
         <div class="flex gap-x-1 items-center">
-          <p class="font-thin">ROOM00001</p>
-          <img src="/images/edit-name.png" class="w-4" />
+          <p class="font-thin">
+            ROOM <%= patient.roomNumber ? patient.roomNumber : '-' %>
+          </p>
         </div>
       </div>
       <div class="mt-2 lg:mt-0">
         <p class="font-bold">Bed No,</p>
         <div class="flex gap-x-1 items-center">
-          <p class="font-thin">BED00001</p>
-          <img src="/images/edit-name.png" class="w-4" />
+          <p class="font-thin">
+            BED <%= patient.bedNumber ? patient.bedNumber : '-' %>
+          </p>
         </div>
       </div>
     </div>
@@ -88,7 +89,7 @@
       <img src="/images/heart-rate.png" id="option3Image" />
     </button>
     <button
-      class="py-4 px-6 rounded-l-md shadow- hover:bg-[#91c8e4] transition duration-150 ease-in"
+      class="py-4 px-6 rounded-l-md shadow-xl hover:bg-[#91c8e4] transition duration-150 ease-in"
       onclick="showPage('page4')"
       onmouseover="changeImage('option4', '/images/person-white.png')"
       onmouseout="changeImage('option4', '/images/person.png')"
@@ -98,13 +99,19 @@
     </button>
   </div>
   <div
-    class="w-[80%] lg:w-full bg-[#91c8e4] lg:p-4 p-2 rounded-r-md rounded-bl-md gap-x-2 flex items-start main"
+    class="w-[80%] lg:w-full bg-[#91c8e4] lg:p-4 p-2 lg:rounded-r-md lg:rounded-bl-md rounded-r-xl rounded-bl-xl gap-x-2 flex items-start main"
   >
     <div class="w-full items-start gap-x-2 hidden" id="page1">
       <div class="w-full">
-        <div class="flex-col lg:flex-row w-full hidden lg:flex">
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page5'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
+        <div class="flex-col lg:flex-row w-full lg:flex">
           <div
-            class="rounded-xl bg-[#c8e4f1] lg:w-full h-80 flex flex-col items-start pt-4 px-5 pb-10"
+            class="rounded-xl bg-[#c8e4f1] lg:w-full h-80 mb-4 lg:mb-0 flex flex-col items-start pt-4 px-5 pb-10"
           >
             <div class="flex items-center gap-x-2">
               <label for="sleepStageCreatedAt" class="font-semibold"
@@ -262,10 +269,16 @@
 
     <div class="w-full items-start gap-x-2 hidden" id="page2">
       <div class="w-full">
-        <div class="flex gap-x-4 items-end">
-          <div class="w-[60%] h-72 bg-[#c8e4f1] rounded-xl"></div>
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page6'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
+        <div class="lg:flex gap-x-4 items-end">
+          <div class="w-full lg:w-[60%] h-72 bg-[#c8e4f1] rounded-xl"></div>
           <div
-            class="w-[40%] h-72 bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4"
+            class="w-full lg:w-[40%] mt-2 lg:mt-0 h-72 bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4"
           >
             <div>
               <p class="font-bold text-xl">SPO2</p>
@@ -293,7 +306,22 @@
           </div>
         </div>
 
-        <div class="bg-[#c8e4f1] rounded-xl h-64 w-full mt-4 p-4">
+        <div
+          class="rounded-xl mt-2 lg:mt-4 bg-[#c8e4f1] lg:w-full h-80 flex flex-col items-start pt-4 px-5 pb-10"
+        >
+          <div class="flex items-center gap-x-2">
+            <label for="sleepCreatedAt" class="font-semibold"
+              >Choose Date:</label
+            >
+            <input
+              type="date"
+              name="sleepCreatedAt"
+              id="sleepCreatedAt"
+              class="bg-transparent focus:outline-none"
+              onchange="updateSleepChart()"
+              value="2023-10-25"
+            />
+          </div>
           <canvas id="sleepChart" class="w-full"></canvas>
         </div>
 
@@ -349,7 +377,13 @@
     </div>
 
     <div class="w-full items-start gap-x-2 hidden" id="page3">
-      <div class="flex w-full gap-x-4 items-center">
+      <div class="lg:flex w-full gap-x-4 items-center">
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page7'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
         <div
           class="w-full bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4"
         >
@@ -400,7 +434,7 @@
           </div>
         </div>
         <div
-          class="w-full h-64 bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4"
+          class="w-full h-64 bg-[#c8e4f1] mt-2 lg:mt-0 rounded-xl flex flex-col justify-between p-4"
         >
           <div>
             <p class="font-bold text-xl">Blood Pressure</p>
@@ -436,9 +470,18 @@
       </button>
     </div>
 
-    <div class="w-full items-start gap-x-2 hidden" id="page4">
+    <div
+      class="w-full items-start max-[640px]:flex-col gap-x-2 hidden"
+      id="page4"
+    >
+      <button
+        class="lg:hidden items-center"
+        onclick="showPage('page8'); toggleRotation();"
+      >
+        <img src="/images/window.png" class="-mr-2" />
+      </button>
       <div
-        class="w-full flex flex-col lg:flex-row gap-x-32 lg:mt-0 h-[60vh] mt-2 bg-[#c8e4f1] p-4 rounded-xl"
+        class="w-full mt-2 flex flex-col lg:flex-row gap-x-32 lg:mt-0 h-[60vh] bg-[#c8e4f1] p-4 rounded-xl"
       >
         <div class="w-full">
           <div class="w-full">
@@ -502,6 +545,12 @@
 
     <div class="w-full hidden gap-x-2 items-start" id="page5">
       <div class="w-full">
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page1'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
         <div
           class="rounded-xl bg-[#c8e4f1] lg:w-full h-80 flex flex-col items-start pt-4 px-5 pb-10"
         >
@@ -532,6 +581,12 @@
 
     <div class="w-full hidden gap-x-2 items-start" id="page6">
       <div class="w-full">
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page2'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
         <div
           class="rounded-xl bg-[#c8e4f1] lg:w-full h-80 flex flex-col items-start pt-4 px-5 pb-10"
         >
@@ -562,6 +617,12 @@
 
     <div class="w-full hidden gap-x-2 items-start" id="page7">
       <div class="w-full">
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page3'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
         <div class="w-full bg-[#c8e4f1] p-4 rounded-xl">
           <div class="flex items-center gap-x-2">
             <label for="bloodPressureCreatedAt" class="font-semibold"
@@ -603,9 +664,7 @@
             </p>
             <p class="font-semibold">
               Average:
-              <span id="averageHeartRate" class="font-normal"
-                >77.42857142857143</span
-              >,
+              <span id="averageHeartRate" class="font-normal">77.42</span>,
             </p>
           </div>
         </div>
@@ -620,6 +679,12 @@
 
     <div class="w-full hidden gap-x-2 items-start" id="page8">
       <div class="w-full">
+        <button
+          class="lg:hidden items-center"
+          onclick="showPage('page4'); toggleRotation();"
+        >
+          <img src="/images/window.png" class="-mr-2" />
+        </button>
         <div class="w-full bg-[#c8e4f1] p-4 rounded-xl">
           <div class="flex items-center gap-x-2">
             <label for="heightWeightCreatedAt" class="font-semibold"
@@ -715,30 +780,52 @@
   let sleepStageDefault = {
     date: "2023-10-25",
     time: [
-      '16:22:00.000', '16:24:00.000', '16:27:00.000',
-      '16:28:00.000', '16:29:00.000', '16:31:00.000',
-      '16:32:00.000', '16:40:00.000', '16:41:00.000',
-      '16:51:00.000', '16:54:00.000', '17:01:00.000',
-      '17:02:00.000', '17:11:00.000', '17:18:00.000',
-      '17:19:00.000', '17:26:00.000', '17:31:00.000',
-      '17:35:00.000', '19:14:00.000', '19:38:00.000',
-      '19:40:00.000', '19:57:00.000', '20:05:00.000',
-      '20:32:00.000', '20:33:00.000', '20:36:00.000',
-      '20:37:00.000', '21:02:00.000', '21:15:00.000',
-      '21:18:00.000', '21:28:00.000', '21:30:00.000',
-      '21:34:00.000', '21:52:00.000', '21:59:00.000',
-      '22:02:00.000', '22:11:00.000', '22:13:00.000'
+      "16:22:00",
+      "16:24:00",
+      "16:27:00",
+      "16:28:00",
+      "16:29:00",
+      "16:31:00",
+      "16:32:00",
+      "16:40:00",
+      "16:41:00",
+      "16:51:00",
+      "16:54:00",
+      "17:01:00",
+      "17:02:00",
+      "17:11:00",
+      "17:18:00",
+      "17:19:00",
+      "17:26:00",
+      "17:31:00",
+      "17:35:00",
+      "19:14:00",
+      "19:38:00",
+      "19:40:00",
+      "19:57:00",
+      "20:05:00",
+      "20:32:00",
+      "20:33:00",
+      "20:36:00",
+      "20:37:00",
+      "21:02:00",
+      "21:15:00",
+      "21:18:00",
+      "21:28:00",
+      "21:30:00",
+      "21:34:00",
+      "21:52:00",
+      "21:59:00",
+      "22:02:00",
+      "22:11:00",
+      "22:13:00",
     ],
     stage: [
-      40001, 40002, 40001, 40002, 40004,
-      40001, 40004, 40001, 40004, 40002,
-      40004, 40001, 40004, 40002, 40004,
-      40001, 40002, 40004, 40001, 40002,
-      40001, 40002, 40003, 40004, 40001,
-      40002, 40001, 40002, 40003, 40001,
-      40002, 40001, 40002, 40004, 40002,
-      40004, 40002, 40004, 40001
-    ]
+      40001, 40002, 40001, 40002, 40004, 40001, 40004, 40001, 40004, 40002,
+      40004, 40001, 40004, 40002, 40004, 40001, 40002, 40004, 40001, 40002,
+      40001, 40002, 40003, 40004, 40001, 40002, 40001, 40002, 40003, 40001,
+      40002, 40001, 40002, 40004, 40002, 40004, 40002, 40004, 40001,
+    ],
   };
 
   var sleepStageChart = new Chart(sleepStageCtx, {
@@ -759,17 +846,20 @@
     options: {
       responsive: true, // Instruct chart js to respond nicely.
       maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+      scale: {
+        ticks: {
+          precision: 0,
+        },
+      },
     },
   });
 
   function updateSleepStageChart() {
-    const selectedDate = document.getElementById(
-      "sleepStageCreatedAt"
-    ).value;
+    const selectedDate = document.getElementById("sleepStageCreatedAt").value;
     sleepStageDefault = patient.features.sleepStageHistory.find(
       (entry) => entry.date === selectedDate
     );
-    if(sleepStageDefault){
+    if (sleepStageDefault) {
       sleepStageChart.data.labels = sleepStageDefault.time;
       sleepStageChart.data.datasets[0].data = sleepStageDefault.stage;
     } else {
@@ -782,10 +872,10 @@
   /* rrSpo2 */
   const rrSpo2Ctx = document.getElementById("rrSpo2Chart");
   let rrSpo2Default = {
-    date: '2021-11-20',
-    time: [ '09:35:05.153' ],
-    rr: [ 12 ],
-    spo2: [ 73 ]
+    date: "2021-11-20",
+    time: ["09:35:05.153"],
+    rr: [12],
+    spo2: [73],
   };
 
   var rrSpo2Chart = new Chart(rrSpo2Ctx, {
@@ -818,14 +908,12 @@
   });
 
   function updateRrSpo2Chart() {
-    const selectedDate = document.getElementById(
-      "rrSpo2CreatedAt"
-    ).value;
+    const selectedDate = document.getElementById("rrSpo2CreatedAt").value;
     rrSpo2Default = patient.features.rrSpo2History.find(
       (entry) => entry.date === selectedDate
     );
-    console.log(rrSpo2Default)
-    if(rrSpo2Default){
+    console.log(rrSpo2Default);
+    if (rrSpo2Default) {
       rrSpo2Chart.data.labels = rrSpo2Default.time;
       rrSpo2Chart.data.datasets[0].data = rrSpo2Default.rr;
       rrSpo2Chart.data.datasets[1].data = rrSpo2Default.spo2;
@@ -841,44 +929,62 @@
   const sleepCtx = document.getElementById("sleepChart");
   const sleepLabels = ["light-sleep", "deep-sleep", "REM", "awake"];
   let sleepDefault = {
-    labels: sleepLabels,
-    datasets: [
-      {
-        axis: "y",
-        label: "Sleep Chart",
-        data: [20, 155, 15, 120],
-        fill: false,
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(255, 205, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-        ],
-        borderColor: [
-          "rgb(255, 99, 132)",
-          "rgb(255, 159, 64)",
-          "rgb(255, 205, 86)",
-          "rgb(75, 192, 192)",
-        ],
-        borderWidth: 1,
-      },
-    ],
+    date: "2023-10-25",
+    sleep: [45, 110, 30, 180]
   };
+
   var sleepChart = new Chart(sleepCtx, {
     type: "bar",
-    data: sleepDefault,
+    data: {
+      labels: sleepLabels,
+      datasets: [
+        {
+          axis: "y",
+          label: "Sleep Chart",
+          data: sleepDefault.sleep,
+          fill: false,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            "rgba(255, 205, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+          ],
+          borderColor: [
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
     options: {
       indexAxis: "y",
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-      x: {
-        beginAtZero: true,
-        max: 240, // Set the maximum value for the x-axis
+        x: {
+          beginAtZero: true,
+          max: 240, // Set the maximum value for the x-axis
+        },
       },
     },
-    },
   });
+
+  function updateSleepChart() {
+    const selectedDate = document.getElementById("sleepCreatedAt").value;
+    sleepDefault = patient.features.sleepHistory.find(
+      (entry) => entry.date === selectedDate
+    );
+    if (sleepDefault) {
+      sleepChart.data.datasets[0].data = sleepDefault.sleep;
+    } else {
+      sleepChart.data.labels = null;
+      sleepChart.data.datasets[0].data = null;
+    }
+    sleepChart.update();
+  }
 
   /* Blood Pressure */
   const bloodPressureCtx = document.getElementById("bloodPressureChart");
@@ -942,7 +1048,7 @@
     bloodPressureDefault = patient.features.bloodPressureHistory.find(
       (entry) => entry.date === selectedDate
     );
-    if(bloodPressureDefault){
+    if (bloodPressureDefault) {
       bloodPressureChart.data.labels = bloodPressureDefault.time;
       bloodPressureChart.data.datasets[0].data = bloodPressureDefault.meanPulse;
       bloodPressureChart.data.datasets[1].data = bloodPressureDefault.systolic;
@@ -1010,20 +1116,25 @@
     heartRateDefault = patient.features.heartRateHistory.find(
       (entry) => entry.date === selectedDate
     );
-    if(heartRateDefault){
+    if (heartRateDefault) {
       heartRateChart.data.labels = heartRateDefault.time;
       heartRateChart.data.datasets[0].data = heartRateDefault.heartRate;
       heartRateChart.data.datasets[1].data = heartRateDefault.heartBeatCount;
-      maxHeartRate.innerText= `${Math.max(...heartRateDefault.heartRate)}`;
-      minHeartRate.innerText= `${Math.min(...heartRateDefault.heartRate)}`;
-      averageHeartRate.innerText= `${heartRateDefault.heartRate.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / heartRateDefault.heartRate.length}`;
+      maxHeartRate.innerText = `${Math.max(...heartRateDefault.heartRate)}`;
+      minHeartRate.innerText = `${Math.min(...heartRateDefault.heartRate)}`;
+      averageHeartRate.innerText = `${(
+        heartRateDefault.heartRate.reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          0
+        ) / heartRateDefault.heartRate.length
+      ).toFixed(1)}`;
     } else {
       heartRateChart.data.labels = null;
       heartRateChart.data.datasets[0].data = null;
       heartRateChart.data.datasets[1].data = null;
-      maxHeartRate.innerText= "null";
-      minHeartRate.innerText= "null";
-      averageHeartRate.innerText= "null";
+      maxHeartRate.innerText = "null";
+      minHeartRate.innerText = "null";
+      averageHeartRate.innerText = "null";
     }
     heartRateChart.update();
   }
@@ -1031,25 +1142,18 @@
   /* Height & Weight */
   const heightWeightCtx = document.getElementById("heightWeightChart");
   let heightWeightDefault = {
-    date: '2021-11-20',
+    date: "2021-11-20",
     time: [
-      '02:25:10.469',
-      '07:59:18.206',
-      '08:20:28.956',
-      '08:30:14.033',
-      '13:59:23.187',
-      '15:59:35.117',
-      '16:45:37.951'
+      "02:25:10.469",
+      "07:59:18.206",
+      "08:20:28.956",
+      "08:30:14.033",
+      "13:59:23.187",
+      "15:59:35.117",
+      "16:45:37.951",
     ],
-    height: [
-      166, 166, 166,
-      166, 166, 166,
-      166
-    ],
-    weight: [
-      61, 61, 61, 61,
-      61, 61, 61
-    ],
+    height: [166, 166, 166, 166, 166, 166, 166],
+    weight: [61, 61, 61, 61, 61, 61, 61],
   };
 
   var heightWeightChart = new Chart(heightWeightCtx, {
@@ -1087,7 +1191,7 @@
       (entry) => entry.date === selectedDate
     );
     console.log(heightWeightDefault);
-    if(heightWeightDefault){
+    if (heightWeightDefault) {
       heightWeightChart.data.labels = heightWeightDefault.time;
       heightWeightChart.data.datasets[0].data = heightWeightDefault.height;
       heightWeightChart.data.datasets[1].data = heightWeightDefault.weight;
@@ -1102,20 +1206,17 @@
   /* BMI */
   const bmiCtx = document.getElementById("bmiChart");
   let bmiDefault = {
-    date: '2021-11-20',
+    date: "2021-11-20",
     time: [
-      '02:10:10.469',
-      '07:45:18.206',
-      '08:05:28.956',
-      '08:15:14.033',
-      '13:45:23.187',
-      '15:40:35.117',
-      '16:30:37.951'
+      "02:10:10.469",
+      "07:45:18.206",
+      "08:05:28.956",
+      "08:15:14.033",
+      "13:45:23.187",
+      "15:40:35.117",
+      "16:30:37.951",
     ],
-    bmi: [
-      22, 22, 22, 20,
-      18, 19, 23
-    ]
+    bmi: [22, 22, 22, 20, 18, 19, 23],
   };
 
   var bmiChart = new Chart(bmiCtx, {
@@ -1145,7 +1246,7 @@
       (entry) => entry.date === selectedDate
     );
     console.log(bmiDefault);
-    if(bmiDefault){
+    if (bmiDefault) {
       bmiChart.data.labels = bmiDefault.time;
       bmiChart.data.datasets[0].data = bmiDefault.bmi;
     } else {
@@ -1158,19 +1259,17 @@
   /* Temperature */
   const temperatureCtx = document.getElementById("temperatureChart");
   let temperatureDefault = {
-    date: '2021-11-20',
+    date: "2021-11-20",
     time: [
-      '02:20:10.469',
-      '07:55:18.206',
-      '08:15:28.956',
-      '08:25:14.033',
-      '13:55:23.187',
-      '15:55:35.117',
-      '16:40:37.951'
+      "02:20:10.469",
+      "07:55:18.206",
+      "08:15:28.956",
+      "08:25:14.033",
+      "13:55:23.187",
+      "15:55:35.117",
+      "16:40:37.951",
     ],
-    temperature: [
-      36.1, 36, 36, 36, 36, 36, 36
-    ]
+    temperature: [36.1, 36, 36, 36, 36, 36, 36],
   };
 
   var temperatureChart = new Chart(temperatureCtx, {
@@ -1200,7 +1299,7 @@
       (entry) => entry.date === selectedDate
     );
     console.log(temperatureDefault);
-    if(temperatureDefault){
+    if (temperatureDefault) {
       temperatureChart.data.labels = temperatureDefault.time;
       temperatureChart.data.datasets[0].data = temperatureDefault.temperature;
     } else {

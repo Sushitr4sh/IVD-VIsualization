@@ -1,15 +1,17 @@
 <% layout('layouts/boilerplate') -%>
-<div class="px-32 mt-16">
+<div class="px-4 lg:px-32 mt-16">
   <h1 class="text-3xl font-bold">Update Patient Data</h1>
   <p class="mt-2"><%= patient.fullName%> - <%= patient.patientId %></p>
 </div>
-<main class="px-32 w-full">
+<main class="px-4 lg:px-32 w-full">
   <form
     action="/patients/<%= patient.patientId %>/add-data"
     method="POST"
     class="mt-8 w-full"
   >
-    <div class="flex gap-x-4 w-full bg-[#91c8e4] p-4 rounded-lg">
+    <div
+      class="flex flex-col lg:flex-row gap-x-4 w-full bg-[#91c8e4] p-2 lg:p-4 rounded-lg"
+    >
       <div class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4">
         <div>
           <label class="font-bold text-xl" for="systolic"
@@ -60,7 +62,9 @@
           </div>
         </div>
       </div>
-      <div class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4">
+      <div
+        class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4 mt-2 lg:mt-0"
+      >
         <div>
           <label class="font-bold text-xl" for="spo2"
             >SPO2 <span class="text-black font-thin text-base">(%)</span></label
@@ -92,7 +96,9 @@
           </div>
         </div>
       </div>
-      <div class="rounded-xl flex flex-col bg-[#c8e4f1] w-full p-4">
+      <div
+        class="rounded-xl flex flex-col bg-[#c8e4f1] w-full mt-2 lg:mt-0 p-4"
+      >
         <div>
           <label class="font-bold text-xl" for="bmi"
             >BMI
