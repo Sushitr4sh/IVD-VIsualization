@@ -101,7 +101,7 @@ app.put("/patients/:id/edit-profile", async (req, res) => {
 
 app.post("/patients/:id/add-data", async (req, res) => {
   const { id } = req.params;
-  await Patient.findOneAndUpdate(
+  const patient = await Patient.findOneAndUpdate(
     { patientId: id },
     {
       systolic: req.body.systolic,
@@ -117,6 +117,49 @@ app.post("/patients/:id/add-data", async (req, res) => {
       bodyHeight: req.body.bodyHeight,
     }
   );
+
+  function convertDateFormat(inputDate) {
+    // Split the input date string into an array [MM, DD, YYYY]
+    const dateParts = inputDate.split("/");
+
+    // Rearrange the date parts to form the output date string [YYYY, MM, DD]
+    const outputDate = `${dateParts[2]}-${dateParts[0]}-${dateParts[1]}`;
+
+    return outputDate;
+  }
+
+  const today = convertDateFormat(new Date().toLocaleDateString());
+
+  //check if today's data exist
+  if (
+    patient.bloodPressureHistory[patient.bloodPressureHistory.length - 1]
+      .date !== today
+  ) {
+    const newBloodPressureEntry = {
+      date: today,
+      time: [new Date().toLocaleTimeString()],
+      systolic: [req.body.systolic],
+      diastolic: [req.body.diastolic],
+      meanPulse: [req.body.systolic - req.body.diastolic],
+    };
+    patient.bloodPressureHistory.push(newBloodPressureEntry);
+    await patient.save();
+  } else {
+    patient.bloodPressureHistory[
+      patient.bloodPressureHistory.length - 1
+    ].time.push(new Date().toLocaleTimeString());
+    patient.bloodPressureHistory[
+      patient.bloodPressureHistory.length - 1
+    ].systolic.push(req.body.systolic);
+    patient.bloodPressureHistory[
+      patient.bloodPressureHistory.length - 1
+    ].diastolic.push(req.body.diastolic);
+    patient.bloodPressureHistory[
+      patient.bloodPressureHistory.length - 1
+    ].meanPulse.push(req.body.systolic - req.body.diastolic);
+    await patient.save();
+  }
+
   res.redirect(`/patients/${id}`);
 });
 

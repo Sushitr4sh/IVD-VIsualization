@@ -778,54 +778,9 @@
   /* Sleep Stage */
   const sleepStageCtx = document.getElementById("sleepStageChart");
   let sleepStageDefault = {
-    date: "2023-10-25",
-    time: [
-      "16:22:00",
-      "16:24:00",
-      "16:27:00",
-      "16:28:00",
-      "16:29:00",
-      "16:31:00",
-      "16:32:00",
-      "16:40:00",
-      "16:41:00",
-      "16:51:00",
-      "16:54:00",
-      "17:01:00",
-      "17:02:00",
-      "17:11:00",
-      "17:18:00",
-      "17:19:00",
-      "17:26:00",
-      "17:31:00",
-      "17:35:00",
-      "19:14:00",
-      "19:38:00",
-      "19:40:00",
-      "19:57:00",
-      "20:05:00",
-      "20:32:00",
-      "20:33:00",
-      "20:36:00",
-      "20:37:00",
-      "21:02:00",
-      "21:15:00",
-      "21:18:00",
-      "21:28:00",
-      "21:30:00",
-      "21:34:00",
-      "21:52:00",
-      "21:59:00",
-      "22:02:00",
-      "22:11:00",
-      "22:13:00",
-    ],
-    stage: [
-      40001, 40002, 40001, 40002, 40004, 40001, 40004, 40001, 40004, 40002,
-      40004, 40001, 40004, 40002, 40004, 40001, 40002, 40004, 40001, 40002,
-      40001, 40002, 40003, 40004, 40001, 40002, 40001, 40002, 40003, 40001,
-      40002, 40001, 40002, 40004, 40002, 40004, 40002, 40004, 40001,
-    ],
+    date: patient.features.sleepStageHistory[0].date,
+    time: patient.features.sleepStageHistory[0].time,
+    stage: patient.features.sleepStageHistory[0].stage,
   };
 
   var sleepStageChart = new Chart(sleepStageCtx, {
@@ -872,10 +827,10 @@
   /* rrSpo2 */
   const rrSpo2Ctx = document.getElementById("rrSpo2Chart");
   let rrSpo2Default = {
-    date: "2021-11-20",
-    time: ["09:35:05.153"],
-    rr: [12],
-    spo2: [73],
+    date: patient.features.rrSpo2History[0].date,
+    time: patient.features.rrSpo2History[0].time,
+    rr: patient.features.rrSpo2History[0].rr,
+    spo2: patient.features.rrSpo2History[0].spo2,
   };
 
   var rrSpo2Chart = new Chart(rrSpo2Ctx, {
@@ -929,8 +884,8 @@
   const sleepCtx = document.getElementById("sleepChart");
   const sleepLabels = ["light-sleep", "deep-sleep", "REM", "awake"];
   let sleepDefault = {
-    date: "2023-10-25",
-    sleep: [45, 110, 30, 180]
+    date: patient.features.sleepHistory[0].date,
+    sleep: patient.features.sleepHistory[0].sleep
   };
 
   var sleepChart = new Chart(sleepCtx, {
@@ -990,19 +945,11 @@
   /* Blood Pressure */
   const bloodPressureCtx = document.getElementById("bloodPressureChart");
   let bloodPressureDefault = {
-    date: "2021-11-20",
-    time: [
-      "01:58:10.469",
-      "07:40:18.206",
-      "08:02:28.956",
-      "08:09:14.033",
-      "13:37:23.187",
-      "15:36:35.117",
-      "16:26:37.951",
-    ],
-    systolic: [126, 126, 126, 121, 118, 116, 118],
-    diastolic: [86, 85, 83, 81, 80, 81, 81],
-    meanPulse: [40, 41, 43, 40, 38, 35, 37],
+    date: patient.features.bloodPressureHistory[0].date,
+    time: patient.features.bloodPressureHistory[0].time,
+    systolic: patient.features.bloodPressureHistory[0].systolic,
+    diastolic: patient.features.bloodPressureHistory[0].diastolic,
+    meanPulse: patient.features.bloodPressureHistory[0].meanPulse,
   };
 
   var bloodPressureChart = new Chart(bloodPressureCtx, {
@@ -1066,18 +1013,10 @@
   /* Heart Rate */
   const heartRateCtx = document.getElementById("heartRateChart");
   let heartRateDefault = {
-    date: "2021-11-20",
-    time: [
-      "02:30:10.469",
-      "08:04:18.206",
-      "08:25:28.956",
-      "08:35:14.033",
-      "14:04:23.187",
-      "16:04:35.117",
-      "16:55:37.951",
-    ],
-    heartRate: [66, 87, 68, 85, 83, 80, 73],
-    heartBeatCount: [70, 71, 96, 82, 95, 94, 63],
+    date: patient.features.heartRateHistory[0].date,
+    time: patient.features.heartRateHistory[0].time,
+    heartRate: patient.features.heartRateHistory[0].heartRate,
+    heartBeatCount: patient.features.heartRateHistory[0].heartBeatCount,
   };
 
   var heartRateChart = new Chart(heartRateCtx, {
@@ -1143,18 +1082,10 @@
   /* Height & Weight */
   const heightWeightCtx = document.getElementById("heightWeightChart");
   let heightWeightDefault = {
-    date: "2021-11-20",
-    time: [
-      "02:25:10.469",
-      "07:59:18.206",
-      "08:20:28.956",
-      "08:30:14.033",
-      "13:59:23.187",
-      "15:59:35.117",
-      "16:45:37.951",
-    ],
-    height: [166, 166, 166, 166, 166, 166, 166],
-    weight: [61, 61, 61, 61, 61, 61, 61],
+    date: patient.features.heightWeightHistory[0].date,
+    time: patient.features.heightWeightHistory[0].time,
+    height: patient.features.heightWeightHistory[0].height,
+    weight: patient.features.heightWeightHistory[0].weight,
   };
 
   var heightWeightChart = new Chart(heightWeightCtx, {
@@ -1207,17 +1138,9 @@
   /* BMI */
   const bmiCtx = document.getElementById("bmiChart");
   let bmiDefault = {
-    date: "2021-11-20",
-    time: [
-      "02:10:10.469",
-      "07:45:18.206",
-      "08:05:28.956",
-      "08:15:14.033",
-      "13:45:23.187",
-      "15:40:35.117",
-      "16:30:37.951",
-    ],
-    bmi: [22, 22, 22, 20, 18, 19, 23],
+    date: patient.features.bmiHistory[0].date,
+    time: patient.features.bmiHistory[0].time,
+    bmi: patient.features.bmiHistory[0].bmi,
   };
 
   var bmiChart = new Chart(bmiCtx, {
@@ -1260,17 +1183,9 @@
   /* Temperature */
   const temperatureCtx = document.getElementById("temperatureChart");
   let temperatureDefault = {
-    date: "2021-11-20",
-    time: [
-      "02:20:10.469",
-      "07:55:18.206",
-      "08:15:28.956",
-      "08:25:14.033",
-      "13:55:23.187",
-      "15:55:35.117",
-      "16:40:37.951",
-    ],
-    temperature: [36.1, 36, 36, 36, 36, 36, 36],
+    date: patient.features.temperatureHistory[0].date,
+    time: patient.features.temperatureHistory[0].time,
+    temperature: patient.features.temperatureHistory[0].temperature,
   };
 
   var temperatureChart = new Chart(temperatureCtx, {
