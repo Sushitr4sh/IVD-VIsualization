@@ -93,6 +93,7 @@ app.get("/patients/:id/edit-profile", async (req, res) => {
 app.put("/patients/:id/edit-profile", async (req, res) => {
   const { id } = req.params;
   const patient = await Patient.findOne({ patientId: id });
+  patient.fullName = req.body.fullName;
   patient.roomNumber = req.body.roomNumber;
   patient.bedNumber = req.body.bedNumber;
   await patient.save();
