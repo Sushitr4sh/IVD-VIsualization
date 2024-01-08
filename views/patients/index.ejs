@@ -103,10 +103,7 @@
   >
     <div class="w-full items-start gap-x-2 hidden" id="page1">
       <div class="w-full">
-        <button
-          class="lg:hidden items-center"
-          onclick="showPage('page5'); toggleRotation();"
-        >
+        <button class="lg:hidden items-center">
           <img src="/images/window.png" class="-mr-2" />
         </button>
         <div class="flex-col lg:flex-row w-full lg:flex">
@@ -259,10 +256,7 @@
         </div>
       </div>
 
-      <button
-        class="lg:flex items-center hidden"
-        onclick="showPage('page5'); toggleRotation();"
-      >
+      <button class="lg:flex items-center hidden">
         <img src="/images/window.png" class="-mr-2" />
       </button>
     </div>
@@ -276,9 +270,8 @@
           <img src="/images/window.png" class="-mr-2" />
         </button>
         <div class="lg:flex gap-x-4 items-end">
-          <div class="w-full lg:w-[60%] h-72 bg-[#c8e4f1] rounded-xl"></div>
           <div
-            class="w-full lg:w-[40%] mt-2 lg:mt-0 h-72 bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4"
+            class="w-full mt-2 lg:mt-0 h-72 bg-[#c8e4f1] rounded-xl flex flex-col justify-between p-4"
           >
             <div>
               <p class="font-bold text-xl">SPO2</p>
@@ -774,6 +767,7 @@
 
 <script>
   const patient = {features: <%-JSON.stringify(patient)%>};
+  console.log(patient)
 
   /* Sleep Stage */
   const sleepStageCtx = document.getElementById("sleepStageChart");
@@ -996,6 +990,8 @@
     bloodPressureDefault = patient.features.bloodPressureHistory.find(
       (entry) => entry.date === selectedDate
     );
+    console.log(patient.features.bloodPressureHistory[102])
+    console.log(selectedDate)
     if (bloodPressureDefault) {
       bloodPressureChart.data.labels = bloodPressureDefault.time;
       bloodPressureChart.data.datasets[0].data = bloodPressureDefault.meanPulse;

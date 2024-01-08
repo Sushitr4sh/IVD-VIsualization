@@ -122,16 +122,35 @@ app.post("/patients/:id/add-data", async (req, res) => {
     // Split the input date string into an array [MM, DD, YYYY]
     const dateParts = inputDate.split("/");
 
+    // Add leading zero to month and day if needed
+    const month = dateParts[0].padStart(2, "0");
+    const day = dateParts[1].padStart(2, "0");
+
     // Rearrange the date parts to form the output date string [YYYY, MM, DD]
-    const outputDate = `${dateParts[2]}-${dateParts[0]}-${dateParts[1]}`;
+    const outputDate = `${dateParts[2]}-${month}-${day}`;
 
     return outputDate;
   }
 
   const today = convertDateFormat(new Date().toLocaleDateString());
+  console.log(today); // Output: "2024-01-08" (assuming today's date is January 8, 2024)
 
   //check if today's data exist
   if (
+    !patient.bloodPressureHistory ||
+    patient.bloodPressureHistory.length === 0
+  ) {
+    // If bloodPressureHistory is empty, create a new entry
+    const newBloodPressureEntry = {
+      date: today,
+      time: [new Date().toLocaleTimeString()],
+      systolic: [req.body.systolic],
+      diastolic: [req.body.diastolic],
+      meanPulse: [req.body.systolic - req.body.diastolic],
+    };
+    patient.bloodPressureHistory = [newBloodPressureEntry];
+    await patient.save();
+  } else if (
     patient.bloodPressureHistory[patient.bloodPressureHistory.length - 1]
       .date !== today
   ) {
