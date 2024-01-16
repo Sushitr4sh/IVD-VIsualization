@@ -120,7 +120,6 @@
                 id="sleepStageCreatedAt"
                 class="bg-transparent focus:outline-none"
                 onchange="updateSleepStageChart()"
-                value="2023-10-25"
               />
             </div>
             <canvas id="sleepStageChart" class="w-full"></canvas>
@@ -312,7 +311,6 @@
               id="sleepCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateSleepChart()"
-              value="2023-10-25"
             />
           </div>
           <canvas id="sleepChart" class="w-full"></canvas>
@@ -557,7 +555,6 @@
               id="sleepStageCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateSleepStageChart()"
-              value="2023-10-25"
             />
           </div>
           <canvas id="sleepStageChart" class="w-full"></canvas>
@@ -593,7 +590,6 @@
               id="rrSpo2CreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateRrSpo2Chart()"
-              value="2021-11-20"
             />
           </div>
           <canvas id="rrSpo2Chart" class="w-full"></canvas>
@@ -627,7 +623,6 @@
               id="bloodPressureCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateBloodPressureChart()"
-              value="2021-11-20"
             />
           </div>
           <canvas id="bloodPressureChart" class="w-full"></canvas>
@@ -643,7 +638,6 @@
               id="heartRateCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateHeartRateChart()"
-              value="2021-11-20"
             />
           </div>
           <canvas id="heartRateChart" class="w-full"></canvas>
@@ -689,7 +683,6 @@
               id="heightWeightCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateHeightWeightChart()"
-              value="2021-11-20"
             />
           </div>
           <canvas id="heightWeightChart" class="w-full"></canvas>
@@ -703,7 +696,6 @@
               id="bmiCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateBmiChart()"
-              value="2021-11-20"
             />
           </div>
           <canvas id="bmiChart" class="w-full"></canvas>
@@ -719,7 +711,6 @@
               id="temperatureCreatedAt"
               class="bg-transparent focus:outline-none"
               onchange="updateTemperatureChart()"
-              value="2021-11-20"
             />
           </div>
           <canvas id="temperatureChart" class="w-full"></canvas>
@@ -767,457 +758,499 @@
 
 <script>
   const patient = {features: <%-JSON.stringify(patient)%>};
-  console.log(patient)
+  console.log(patient);
 
   /* Sleep Stage */
-  const sleepStageCtx = document.getElementById("sleepStageChart");
-  let sleepStageDefault = {
-    date: patient.features.sleepStageHistory[0].date,
-    time: patient.features.sleepStageHistory[0].time,
-    stage: patient.features.sleepStageHistory[0].stage,
-  };
+  if (patient.features.sleepStageHistory.length !== 0) {
+    const sleepStageCtx = document.getElementById("sleepStageChart");
+    let sleepStageDefault = {
+      date: patient.features.sleepStageHistory[0].date,
+      time: patient.features.sleepStageHistory[0].time,
+      stage: patient.features.sleepStageHistory[0].stage,
+    };
 
-  var sleepStageChart = new Chart(sleepStageCtx, {
-    type: "line",
-    data: {
-      labels: sleepStageDefault.time,
-      datasets: [
-        {
-          label: "Stage", // Name the first series
-          data: sleepStageDefault.stage, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-      scale: {
-        ticks: {
-          precision: 0,
+    var sleepStageChart = new Chart(sleepStageCtx, {
+      type: "line",
+      data: {
+        labels: sleepStageDefault.time,
+        datasets: [
+          {
+            label: "Stage", // Name the first series
+            data: sleepStageDefault.stage, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+        scale: {
+          ticks: {
+            precision: 0,
+          },
         },
       },
-    },
-  });
+    });
 
-  function updateSleepStageChart() {
-    const selectedDate = document.getElementById("sleepStageCreatedAt").value;
-    sleepStageDefault = patient.features.sleepStageHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    if (sleepStageDefault) {
-      sleepStageChart.data.labels = sleepStageDefault.time;
-      sleepStageChart.data.datasets[0].data = sleepStageDefault.stage;
-    } else {
-      sleepStageChart.data.labels = null;
-      sleepStageChart.data.datasets[0].data = null;
+    const sleepStageCreatedAtValue = document.querySelector("#sleepStageCreatedAt")
+    sleepStageCreatedAtValue.setAttribute(`value`, patient.features.sleepStageHistory[0].date)
+
+    function updateSleepStageChart() {
+      const selectedDate = document.getElementById("sleepStageCreatedAt").value;
+      sleepStageDefault = patient.features.sleepStageHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      if (sleepStageDefault) {
+        sleepStageChart.data.labels = sleepStageDefault.time;
+        sleepStageChart.data.datasets[0].data = sleepStageDefault.stage;
+      } else {
+        sleepStageChart.data.labels = null;
+        sleepStageChart.data.datasets[0].data = null;
+      }
+      sleepStageChart.update();
     }
-    sleepStageChart.update();
   }
 
   /* rrSpo2 */
-  const rrSpo2Ctx = document.getElementById("rrSpo2Chart");
-  let rrSpo2Default = {
-    date: patient.features.rrSpo2History[0].date,
-    time: patient.features.rrSpo2History[0].time,
-    rr: patient.features.rrSpo2History[0].rr,
-    spo2: patient.features.rrSpo2History[0].spo2,
-  };
+  if (patient.features.rrSpo2History.length !== 0) {
+    const rrSpo2Ctx = document.getElementById("rrSpo2Chart");
+    let rrSpo2Default = {
+      date: patient.features.rrSpo2History[0].date,
+      time: patient.features.rrSpo2History[0].time,
+      rr: patient.features.rrSpo2History[0].rr,
+      spo2: patient.features.rrSpo2History[0].spo2,
+    };
 
-  var rrSpo2Chart = new Chart(rrSpo2Ctx, {
-    type: "line",
-    data: {
-      labels: rrSpo2Default.time,
-      datasets: [
-        {
-          label: "rr", // Name the first series
-          data: rrSpo2Default.rr, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-        {
-          label: "spo2", // Name the first series
-          data: rrSpo2Default.spo2, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-    },
-  });
+    var rrSpo2Chart = new Chart(rrSpo2Ctx, {
+      type: "line",
+      data: {
+        labels: rrSpo2Default.time,
+        datasets: [
+          {
+            label: "rr", // Name the first series
+            data: rrSpo2Default.rr, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+          {
+            label: "spo2", // Name the first series
+            data: rrSpo2Default.spo2, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+      },
+    });
 
-  function updateRrSpo2Chart() {
-    const selectedDate = document.getElementById("rrSpo2CreatedAt").value;
-    rrSpo2Default = patient.features.rrSpo2History.find(
-      (entry) => entry.date === selectedDate
-    );
-    console.log(rrSpo2Default);
-    if (rrSpo2Default) {
-      rrSpo2Chart.data.labels = rrSpo2Default.time;
-      rrSpo2Chart.data.datasets[0].data = rrSpo2Default.rr;
-      rrSpo2Chart.data.datasets[1].data = rrSpo2Default.spo2;
-    } else {
-      rrSpo2Chart.data.labels = null;
-      rrSpo2Chart.data.datasets[0].data = null;
-      rrSpo2Chart.data.datasets[1].data = null;
+    const rrSpo2CreatedAtValue = document.querySelector("#rrSpo2CreatedAt")
+    rrSpo2CreatedAtValue.setAttribute(`value`, patient.features.rrSpo2History[0].date)
+
+    function updateRrSpo2Chart() {
+      const selectedDate = document.getElementById("rrSpo2CreatedAt").value;
+      rrSpo2Default = patient.features.rrSpo2History.find(
+        (entry) => entry.date === selectedDate
+      );
+      console.log(rrSpo2Default);
+      if (rrSpo2Default) {
+        rrSpo2Chart.data.labels = rrSpo2Default.time;
+        rrSpo2Chart.data.datasets[0].data = rrSpo2Default.rr;
+        rrSpo2Chart.data.datasets[1].data = rrSpo2Default.spo2;
+      } else {
+        rrSpo2Chart.data.labels = null;
+        rrSpo2Chart.data.datasets[0].data = null;
+        rrSpo2Chart.data.datasets[1].data = null;
+      }
+      rrSpo2Chart.update();
     }
-    rrSpo2Chart.update();
   }
 
   /* Sleep */
-  const sleepCtx = document.getElementById("sleepChart");
-  const sleepLabels = ["light-sleep", "deep-sleep", "REM", "awake"];
-  let sleepDefault = {
-    date: patient.features.sleepHistory[0].date,
-    sleep: patient.features.sleepHistory[0].sleep
-  };
+  if (patient.features.sleepHistory.length !== 0) {
+    const sleepCtx = document.getElementById("sleepChart");
+    const sleepLabels = ["light-sleep", "deep-sleep", "REM", "awake"];
+    let sleepDefault = {
+      date: patient.features.sleepHistory[0].date,
+      sleep: patient.features.sleepHistory[0].sleep,
+    };
 
-  var sleepChart = new Chart(sleepCtx, {
-    type: "bar",
-    data: {
-      labels: sleepLabels,
-      datasets: [
-        {
-          axis: "y",
-          label: "Sleep Chart",
-          data: sleepDefault.sleep,
-          fill: false,
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-            "rgba(255, 205, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-          ],
-          borderColor: [
-            "rgb(255, 99, 132)",
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-          ],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          beginAtZero: true,
-          max: 240, // Set the maximum value for the x-axis
+    var sleepChart = new Chart(sleepCtx, {
+      type: "bar",
+      data: {
+        labels: sleepLabels,
+        datasets: [
+          {
+            axis: "y",
+            label: "Sleep Chart",
+            data: sleepDefault.sleep,
+            fill: false,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+              "rgba(255, 205, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+            ],
+            borderColor: [
+              "rgb(255, 99, 132)",
+              "rgb(255, 159, 64)",
+              "rgb(255, 205, 86)",
+              "rgb(75, 192, 192)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 240, // Set the maximum value for the x-axis
+          },
         },
       },
-    },
-  });
+    });
 
-  function updateSleepChart() {
-    const selectedDate = document.getElementById("sleepCreatedAt").value;
-    sleepDefault = patient.features.sleepHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    if (sleepDefault) {
-      sleepChart.data.labels = sleepLabels;
-      sleepChart.data.datasets[0].data = sleepDefault.sleep;
-    } else {
-      sleepChart.data.labels = null;
-      sleepChart.data.datasets[0].data = null;
+    const sleepCreatedAtValue = document.querySelector("#sleepCreatedAt")
+    sleepCreatedAtValue.setAttribute(`value`, patient.features.sleepHistory[0].date)
+
+    function updateSleepChart() {
+      const selectedDate = document.getElementById("sleepCreatedAt").value;
+      sleepDefault = patient.features.sleepHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      if (sleepDefault) {
+        sleepChart.data.labels = sleepLabels;
+        sleepChart.data.datasets[0].data = sleepDefault.sleep;
+      } else {
+        sleepChart.data.labels = null;
+        sleepChart.data.datasets[0].data = null;
+      }
+      sleepChart.update();
     }
-    sleepChart.update();
   }
 
   /* Blood Pressure */
-  const bloodPressureCtx = document.getElementById("bloodPressureChart");
-  let bloodPressureDefault = {
-    date: patient.features.bloodPressureHistory[0].date,
-    time: patient.features.bloodPressureHistory[0].time,
-    systolic: patient.features.bloodPressureHistory[0].systolic,
-    diastolic: patient.features.bloodPressureHistory[0].diastolic,
-    meanPulse: patient.features.bloodPressureHistory[0].meanPulse,
-  };
+  if (patient.features.bloodPressureHistory.length !== 0) {
+    const bloodPressureCtx = document.getElementById("bloodPressureChart");
+    let bloodPressureDefault = {
+      date: patient.features.bloodPressureHistory[0].date,
+      time: patient.features.bloodPressureHistory[0].time,
+      systolic: patient.features.bloodPressureHistory[0].systolic,
+      diastolic: patient.features.bloodPressureHistory[0].diastolic,
+      meanPulse: patient.features.bloodPressureHistory[0].meanPulse,
+    };
 
-  var bloodPressureChart = new Chart(bloodPressureCtx, {
-    type: "line",
-    data: {
-      labels: bloodPressureDefault.time,
-      datasets: [
-        {
-          label: "Mean Pulse", // Name the first series
-          data: bloodPressureDefault.meanPulse, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-        {
-          label: "Systolic", // Name the first series
-          data: bloodPressureDefault.systolic, // Specify the data values array
-          fill: false,
-          borderColor: "#2196f3", // Add custom color border (Line)
-          backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-        {
-          label: "Diastolic", // Name the second series
-          data: bloodPressureDefault.diastolic, // Specify the data values array for the second line
-          fill: false,
-          borderColor: "#ff5722", // Add custom color border for the second line
-          backgroundColor: "#ff5722", // Add custom color background for the second line
-          borderWidth: 1, // Specify bar border width for the second line
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    },
-  });
+    var bloodPressureChart = new Chart(bloodPressureCtx, {
+      type: "line",
+      data: {
+        labels: bloodPressureDefault.time,
+        datasets: [
+          {
+            label: "Mean Pulse", // Name the first series
+            data: bloodPressureDefault.meanPulse, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+          {
+            label: "Systolic", // Name the first series
+            data: bloodPressureDefault.systolic, // Specify the data values array
+            fill: false,
+            borderColor: "#2196f3", // Add custom color border (Line)
+            backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+          {
+            label: "Diastolic", // Name the second series
+            data: bloodPressureDefault.diastolic, // Specify the data values array for the second line
+            fill: false,
+            borderColor: "#ff5722", // Add custom color border for the second line
+            backgroundColor: "#ff5722", // Add custom color background for the second line
+            borderWidth: 1, // Specify bar border width for the second line
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+      },
+    });
 
-  function updateBloodPressureChart() {
-    const selectedDate = document.getElementById(
-      "bloodPressureCreatedAt"
-    ).value;
-    bloodPressureDefault = patient.features.bloodPressureHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    console.log(patient.features.bloodPressureHistory[102])
-    console.log(selectedDate)
-    if (bloodPressureDefault) {
-      bloodPressureChart.data.labels = bloodPressureDefault.time;
-      bloodPressureChart.data.datasets[0].data = bloodPressureDefault.meanPulse;
-      bloodPressureChart.data.datasets[1].data = bloodPressureDefault.systolic;
-      bloodPressureChart.data.datasets[2].data = bloodPressureDefault.diastolic;
-    } else {
-      bloodPressureChart.data.labels = null;
-      bloodPressureChart.data.datasets[0].data = null;
-      bloodPressureChart.data.datasets[1].data = null;
-      bloodPressureChart.data.datasets[2].data = null;
+    const bloodPressureCreatedAtValue = document.querySelector("#bloodPressureCreatedAt")
+    bloodPressureCreatedAtValue.setAttribute(`value`, patient.features.bloodPressureHistory[0].date)
+
+    function updateBloodPressureChart() {
+      const selectedDate = document.getElementById(
+        "bloodPressureCreatedAt"
+      ).value;
+      bloodPressureDefault = patient.features.bloodPressureHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      if (bloodPressureDefault) {
+        bloodPressureChart.data.labels = bloodPressureDefault.time;
+        bloodPressureChart.data.datasets[0].data =
+          bloodPressureDefault.meanPulse;
+        bloodPressureChart.data.datasets[1].data =
+          bloodPressureDefault.systolic;
+        bloodPressureChart.data.datasets[2].data =
+          bloodPressureDefault.diastolic;
+      } else {
+        bloodPressureChart.data.labels = null;
+        bloodPressureChart.data.datasets[0].data = null;
+        bloodPressureChart.data.datasets[1].data = null;
+        bloodPressureChart.data.datasets[2].data = null;
+      }
+      bloodPressureChart.update();
     }
-    bloodPressureChart.update();
   }
 
   /* Heart Rate */
-  const heartRateCtx = document.getElementById("heartRateChart");
-  let heartRateDefault = {
-    date: patient.features.heartRateHistory[0].date,
-    time: patient.features.heartRateHistory[0].time,
-    heartRate: patient.features.heartRateHistory[0].heartRate,
-    heartBeatCount: patient.features.heartRateHistory[0].heartBeatCount,
-  };
+  if (patient.features.heartRateHistory.length !== 0) {
+    const heartRateCtx = document.getElementById("heartRateChart");
+    let heartRateDefault = {
+      date: patient.features.heartRateHistory[0].date,
+      time: patient.features.heartRateHistory[0].time,
+      heartRate: patient.features.heartRateHistory[0].heartRate,
+      heartBeatCount: patient.features.heartRateHistory[0].heartBeatCount,
+    };
 
-  var heartRateChart = new Chart(heartRateCtx, {
-    type: "line",
-    data: {
-      labels: heartRateDefault.time,
-      datasets: [
-        {
-          label: "Heart Rate", // Name the first series
-          data: heartRateDefault.heartRate, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-        {
-          label: "Heart Beat Count", // Name the first series
-          data: heartRateDefault.heartBeatCount, // Specify the data values array
-          fill: false,
-          borderColor: "#2196f3", // Add custom color border (Line)
-          backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    },
-  });
+    var heartRateChart = new Chart(heartRateCtx, {
+      type: "line",
+      data: {
+        labels: heartRateDefault.time,
+        datasets: [
+          {
+            label: "Heart Rate", // Name the first series
+            data: heartRateDefault.heartRate, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+          {
+            label: "Heart Beat Count", // Name the first series
+            data: heartRateDefault.heartBeatCount, // Specify the data values array
+            fill: false,
+            borderColor: "#2196f3", // Add custom color border (Line)
+            backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+      },
+    });
 
-  function updateHeartRateChart() {
-    const selectedDate = document.getElementById("heartRateCreatedAt").value;
-    const maxHeartRate = document.getElementById("maxHeartRate");
-    const minHeartRate = document.getElementById("minHeartRate");
-    const averageHeartRate = document.getElementById("averageHeartRate");
-    heartRateDefault = patient.features.heartRateHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    if (heartRateDefault) {
-      heartRateChart.data.labels = heartRateDefault.time;
-      heartRateChart.data.datasets[0].data = heartRateDefault.heartRate;
-      heartRateChart.data.datasets[1].data = heartRateDefault.heartBeatCount;
-      maxHeartRate.innerText = `${Math.max(...heartRateDefault.heartRate)}`;
-      minHeartRate.innerText = `${Math.min(...heartRateDefault.heartRate)}`;
-      averageHeartRate.innerText = `${(
-        heartRateDefault.heartRate.reduce(
-          (accumulator, currentValue) => accumulator + currentValue,
-          0
-        ) / heartRateDefault.heartRate.length
-      ).toFixed(1)}`;
-    } else {
-      heartRateChart.data.labels = null;
-      heartRateChart.data.datasets[0].data = null;
-      heartRateChart.data.datasets[1].data = null;
-      maxHeartRate.innerText = "null";
-      minHeartRate.innerText = "null";
-      averageHeartRate.innerText = "null";
+    const heartRateCreatedAtValue = document.querySelector("#heartRateCreatedAt")
+    heartRateCreatedAtValue.setAttribute(`value`, patient.features.heartRateHistory[0].date)
+    function updateHeartRateChart() {
+      const selectedDate = document.getElementById("heartRateCreatedAt").value;
+      const maxHeartRate = document.getElementById("maxHeartRate");
+      const minHeartRate = document.getElementById("minHeartRate");
+      const averageHeartRate = document.getElementById("averageHeartRate");
+      heartRateDefault = patient.features.heartRateHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      if (heartRateDefault) {
+        heartRateChart.data.labels = heartRateDefault.time;
+        heartRateChart.data.datasets[0].data = heartRateDefault.heartRate;
+        heartRateChart.data.datasets[1].data = heartRateDefault.heartBeatCount;
+        maxHeartRate.innerText = `${Math.max(...heartRateDefault.heartRate)}`;
+        minHeartRate.innerText = `${Math.min(...heartRateDefault.heartRate)}`;
+        averageHeartRate.innerText = `${(
+          heartRateDefault.heartRate.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            0
+          ) / heartRateDefault.heartRate.length
+        ).toFixed(1)}`;
+      } else {
+        heartRateChart.data.labels = null;
+        heartRateChart.data.datasets[0].data = null;
+        heartRateChart.data.datasets[1].data = null;
+        maxHeartRate.innerText = "null";
+        minHeartRate.innerText = "null";
+        averageHeartRate.innerText = "null";
+      }
+      heartRateChart.update();
     }
-    heartRateChart.update();
   }
 
   /* Height & Weight */
-  const heightWeightCtx = document.getElementById("heightWeightChart");
-  let heightWeightDefault = {
-    date: patient.features.heightWeightHistory[0].date,
-    time: patient.features.heightWeightHistory[0].time,
-    height: patient.features.heightWeightHistory[0].height,
-    weight: patient.features.heightWeightHistory[0].weight,
-  };
+  if (patient.features.heightWeightHistory[0].length !== 0) {
+    const heightWeightCtx = document.getElementById("heightWeightChart");
+    let heightWeightDefault = {
+      date: patient.features.heightWeightHistory[0].date,
+      time: patient.features.heightWeightHistory[0].time,
+      height: patient.features.heightWeightHistory[0].height,
+      weight: patient.features.heightWeightHistory[0].weight,
+    };
 
-  var heightWeightChart = new Chart(heightWeightCtx, {
-    type: "line",
-    data: {
-      labels: heightWeightDefault.time,
-      datasets: [
-        {
-          label: "Height", // Name the first series
-          data: heightWeightDefault.height, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-        {
-          label: "Weight", // Name the first series
-          data: heightWeightDefault.weight, // Specify the data values array
-          fill: false,
-          borderColor: "#2196f3", // Add custom color border (Line)
-          backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    },
-  });
+    var heightWeightChart = new Chart(heightWeightCtx, {
+      type: "line",
+      data: {
+        labels: heightWeightDefault.time,
+        datasets: [
+          {
+            label: "Height", // Name the first series
+            data: heightWeightDefault.height, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+          {
+            label: "Weight", // Name the first series
+            data: heightWeightDefault.weight, // Specify the data values array
+            fill: false,
+            borderColor: "#2196f3", // Add custom color border (Line)
+            backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+      },
+    });
 
-  function updateHeightWeightChart() {
-    const selectedDate = document.getElementById("heightWeightCreatedAt").value;
-    heightWeightDefault = patient.features.heightWeightHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    console.log(heightWeightDefault);
-    if (heightWeightDefault) {
-      heightWeightChart.data.labels = heightWeightDefault.time;
-      heightWeightChart.data.datasets[0].data = heightWeightDefault.height;
-      heightWeightChart.data.datasets[1].data = heightWeightDefault.weight;
-    } else {
-      heightWeightChart.data.labels = null;
-      heightWeightChart.data.datasets[0].data = null;
-      heightWeightChart.data.datasets[1].data = null;
+    const heightWeightCreatedAtValue = document.querySelector("#heightWeightCreatedAt")
+    heightWeightCreatedAtValue.setAttribute(`value`, patient.features.heightWeightHistory[0].date)
+    function updateHeightWeightChart() {
+      const selectedDate = document.getElementById(
+        "heightWeightCreatedAt"
+      ).value;
+      heightWeightDefault = patient.features.heightWeightHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      console.log(heightWeightDefault);
+      if (heightWeightDefault) {
+        heightWeightChart.data.labels = heightWeightDefault.time;
+        heightWeightChart.data.datasets[0].data = heightWeightDefault.height;
+        heightWeightChart.data.datasets[1].data = heightWeightDefault.weight;
+      } else {
+        heightWeightChart.data.labels = null;
+        heightWeightChart.data.datasets[0].data = null;
+        heightWeightChart.data.datasets[1].data = null;
+      }
+      heightWeightChart.update();
     }
-    heightWeightChart.update();
   }
 
   /* BMI */
-  const bmiCtx = document.getElementById("bmiChart");
-  let bmiDefault = {
-    date: patient.features.bmiHistory[0].date,
-    time: patient.features.bmiHistory[0].time,
-    bmi: patient.features.bmiHistory[0].bmi,
-  };
+  if (patient.features.bmiHistory.length !== 0) {
+    const bmiCtx = document.getElementById("bmiChart");
+    let bmiDefault = {
+      date: patient.features.bmiHistory[0].date,
+      time: patient.features.bmiHistory[0].time,
+      bmi: patient.features.bmiHistory[0].bmi,
+    };
 
-  var bmiChart = new Chart(bmiCtx, {
-    type: "line",
-    data: {
-      labels: bmiDefault.time,
-      datasets: [
-        {
-          label: "BMI", // Name the first series
-          data: bmiDefault.bmi, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    },
-  });
+    var bmiChart = new Chart(bmiCtx, {
+      type: "line",
+      data: {
+        labels: bmiDefault.time,
+        datasets: [
+          {
+            label: "BMI", // Name the first series
+            data: bmiDefault.bmi, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+      },
+    });
 
-  function updateBmiChart() {
-    const selectedDate = document.getElementById("bmiCreatedAt").value;
-    bmiDefault = patient.features.bmiHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    console.log(bmiDefault);
-    if (bmiDefault) {
-      bmiChart.data.labels = bmiDefault.time;
-      bmiChart.data.datasets[0].data = bmiDefault.bmi;
-    } else {
-      bmiChart.data.labels = null;
-      bmiChart.data.datasets[0].data = null;
+    const bmiCreatedAtValue = document.querySelector("#bmiCreatedAt")
+    bmiCreatedAtValue.setAttribute(`value`, patient.features.bmiHistory[0].date)
+    function updateBmiChart() {
+      const selectedDate = document.getElementById("bmiCreatedAt").value;
+      bmiDefault = patient.features.bmiHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      console.log(bmiDefault);
+      if (bmiDefault) {
+        bmiChart.data.labels = bmiDefault.time;
+        bmiChart.data.datasets[0].data = bmiDefault.bmi;
+      } else {
+        bmiChart.data.labels = null;
+        bmiChart.data.datasets[0].data = null;
+      }
+      bmiChart.update();
     }
-    bmiChart.update();
   }
 
   /* Temperature */
-  const temperatureCtx = document.getElementById("temperatureChart");
-  let temperatureDefault = {
-    date: patient.features.temperatureHistory[0].date,
-    time: patient.features.temperatureHistory[0].time,
-    temperature: patient.features.temperatureHistory[0].temperature,
-  };
+  if (patient.features.temperatureHistory.length !== 0) {
+    const temperatureCtx = document.getElementById("temperatureChart");
+    let temperatureDefault = {
+      date: patient.features.temperatureHistory[0].date,
+      time: patient.features.temperatureHistory[0].time,
+      temperature: patient.features.temperatureHistory[0].temperature,
+    };
 
-  var temperatureChart = new Chart(temperatureCtx, {
-    type: "line",
-    data: {
-      labels: temperatureDefault.time,
-      datasets: [
-        {
-          label: "Temperature", // Name the first series
-          data: temperatureDefault.temperature, // Specify the data values array
-          fill: false,
-          borderColor: "#6472f8", // Add custom color border (Line)
-          backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
-          borderWidth: 1, // Specify bar border width
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    },
-  });
+    var temperatureChart = new Chart(temperatureCtx, {
+      type: "line",
+      data: {
+        labels: temperatureDefault.time,
+        datasets: [
+          {
+            label: "Temperature", // Name the first series
+            data: temperatureDefault.temperature, // Specify the data values array
+            fill: false,
+            borderColor: "#6472f8", // Add custom color border (Line)
+            backgroundColor: "#6472f8", // Add custom color background (Points and Fill)
+            borderWidth: 1, // Specify bar border width
+          },
+        ],
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+      },
+    });
 
-  function updateTemperatureChart() {
-    const selectedDate = document.getElementById("temperatureCreatedAt").value;
-    temperatureDefault = patient.features.temperatureHistory.find(
-      (entry) => entry.date === selectedDate
-    );
-    console.log(temperatureDefault);
-    if (temperatureDefault) {
-      temperatureChart.data.labels = temperatureDefault.time;
-      temperatureChart.data.datasets[0].data = temperatureDefault.temperature;
-    } else {
-      temperatureChart.data.labels = null;
-      temperatureChart.data.datasets[0].data = null;
+    const temperatureCreatedAtValue = document.querySelector("#temperatureCreatedAt")
+    temperatureCreatedAtValue.setAttribute(`value`, patient.features.temperatureHistory[0].date)
+
+    function updateTemperatureChart() {
+      const selectedDate = document.getElementById(
+        "temperatureCreatedAt"
+      ).value;
+      temperatureDefault = patient.features.temperatureHistory.find(
+        (entry) => entry.date === selectedDate
+      );
+      console.log(temperatureDefault);
+      if (temperatureDefault) {
+        temperatureChart.data.labels = temperatureDefault.time;
+        temperatureChart.data.datasets[0].data = temperatureDefault.temperature;
+      } else {
+        temperatureChart.data.labels = null;
+        temperatureChart.data.datasets[0].data = null;
+      }
+      temperatureChart.update();
     }
-    temperatureChart.update();
   }
 </script>

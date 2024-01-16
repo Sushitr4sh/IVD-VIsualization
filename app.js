@@ -7,24 +7,21 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+/* Method Override */
+const methodOverride = require("method-override");
+
 /* Mongoose */
 const mongoose = require("mongoose");
 
-const methodOverride = require("method-override");
-
 const path = require("path");
-
-const moment = require("moment");
 
 /* Mongoose Models */
 const Patient = require("./models/patient");
 
 /* EJS */
 const ejsMate = require("ejs-mate");
-const patient = require("./models/patient");
 
-const dbUrl =
-  process.env.DB_URL || "mongodb://127.0.0.1:27017/ivdVisualization";
+const dbUrl = process.env.DB_URL;
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -42,10 +39,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
-
-app.get("/test", (req, res) => {
-  res.render("test");
-});
 
 app.get("/register", (req, res) => {
   res.render("patients/register-patient");
@@ -69,6 +62,7 @@ app.post("/patients/search", async (req, res) => {
 app.get("/patients/:id", async (req, res) => {
   const { id } = req.params;
   const patient = await Patient.findOne({ patientId: id });
+  console.log(patient);
   res.render("patients/index", { patient });
 });
 
@@ -157,7 +151,7 @@ app.post("/patients/:id/add-data", async (req, res) => {
   ) {
     const newBloodPressureEntry = {
       date: today,
-      time: [new Date().toLocaleTimeString()],
+      time: [new Date().toLocaleTimeString().substr(0, 7)],
       systolic: [req.body.systolic],
       diastolic: [req.body.diastolic],
       meanPulse: [req.body.systolic - req.body.diastolic],
@@ -167,7 +161,7 @@ app.post("/patients/:id/add-data", async (req, res) => {
   } else {
     patient.bloodPressureHistory[
       patient.bloodPressureHistory.length - 1
-    ].time.push(new Date().toLocaleTimeString());
+    ].time.push(new Date().toLocaleTimeString().substr(0, 7));
     patient.bloodPressureHistory[
       patient.bloodPressureHistory.length - 1
     ].systolic.push(req.body.systolic);
